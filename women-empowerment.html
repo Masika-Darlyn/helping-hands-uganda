@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <link rel="icon" type="image/png" href="images/logo.png">
+  <title>Helping Hands Uganda | Women & Girls Empowerment</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #800000;
+      --primary-light: #a04545;
+      --secondary: #6b2d2d;
+      --accent: #a52a2a;
+      --dark: #330000;
+      --soft-bg: rgba(254, 248, 242, 0.94);
+      --shadow: 0 8px 20px rgba(100, 30, 0, 0.12);
+      --nav-bg: rgb(238, 219, 219);
+      --dropdown-bg: #ffffff;
+    }
+
+    body {
+      background: url('https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover fixed no-repeat;
+      font-family: 'Times New Roman', Times, serif;
+      line-height: 1.6;
+      color: #1f1a17;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(2px);
+      z-index: -2;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+        /* NAVBAR with beautiful background color */
+    .navbar {
+      background: var(--nav-bg);
+      box-shadow: var(--shadow);
+      padding: 0.5rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      width: 100%;
+
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: clamp(1.2rem, 4vw, 1.8rem);
+        color: var(--primary);
+    }
+
+    .logo-img {
+      height: 50px;
+      width: auto;
+      border-radius: 8px;
+      background: white;
+      padding: 3px;
+    }
+
+    .menu-icon {
+      display: none;
+      font-size: 2.4rem;
+      color: var(--primary);
+      cursor: pointer;
+      padding: 0.5rem 1rem;
+      transition: transform 0.2s;
+    }
+
+    .menu-icon:hover {
+      transform: scale(1.05);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .nav-link {
+      font-size: 1rem;
+      padding: 0.7rem 1.3rem;
+      border-radius: 40px;
+       color: var(--dark);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.3s;
+      font-weight: 500;
+    }
+
+    .nav-link:hover {
+      background: rgba(128,0,0,0.08);
+       transform: translateY(-2px);
+    }
+
+    .nav-link.active-home {
+      background: var(--primary);
+      color: white !important;
+       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Dropdown styles */
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-link-wrapper {
+      display: flex;
+      align-items: center;
+      background: transparent;
+      border-radius: 40px;
+      overflow: hidden;
+    }
+
+    .dropdown-text {
+      font-size: 1rem;
+      padding: 0.7rem 0.5rem 0.7rem 1.3rem;
+      color: var(--dark);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 500;
+    }
+
+    .dropdown-text:hover {
+      background: rgba(128,0,0,0.08);
+    }
+
+    .dropdown-icon {
+      font-size: 1rem;
+      padding: 0.7rem 1.3rem 0.7rem 0.5rem;
+      color: var(--dark);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .dropdown-icon i {
+      font-size: 0.7rem;
+      transition: transform 0.2s;
+    }
+
+    .dropdown.active .dropdown-icon i {
+      transform: rotate(180deg);
+    }
+ .dropdown-icon:hover {
+      background: rgba(128,0,0,0.08);
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      min-width: 240px;
+      background: var(--dropdown-bg);
+      border-radius: 20px;
+      box-shadow: 0 20px 35px rgba(0, 0, 0, 0.2);
+      padding: 0.8rem 0;
+      z-index: 1000;
+      margin-top: 5px;
+      border: 1px solid #f0e0e0;
+    }
+
+    .dropdown.active .dropdown-content {
+      display: block;
+    }
+
+    .dropdown-content a {
+      color: var(--dark);
+      padding: 0.8rem 1.8rem;
+      text-decoration: none;
+      display: block;
+      transition: all 0.2s;
+    }
+
+    .dropdown-content a:hover {
+      background: #f0e6e0;
+      color: var(--primary);
+      padding-left: 2rem;
+    }
+
+    .btn {
+      padding: 0.7rem 1.6rem;
+      border-radius: 60px;
+      background: linear-gradient(135deg, #ffb347, #ff8c1a);
+      color: #2d1b0c;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-left: 0.3rem;
+      font-weight: bold;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+      background: linear-gradient(135deg, #ffc26b, #ffa133);
+    }
+    /* Page Header */
+    .page-header {
+      background: linear-gradient(135deg, #6d2e2e 0%, #4d1f1f 100%);
+      color: white;
+      padding: 4rem 0 3.5rem;
+      text-align: center;
+      border-bottom-left-radius: 3rem;
+      border-bottom-right-radius: 3rem;
+      margin: 1.5rem 0 2rem 0;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
+    }
+
+    .page-header h1 {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .page-header p {
+      font-size: 1.3rem;
+      max-width: 700px;
+      margin: 0 auto;
+      opacity: 0.95;
+    }
+
+    /* Main Content */
+    .empowerment-section {
+      padding: 2rem 0 5rem;
+    }
+
+    .content-card {
+      background: rgba(255, 252, 245, 0.95);
+      backdrop-filter: blur(4px);
+      border-radius: 2rem;
+      padding: 2.5rem;
+      margin-bottom: 2.5rem;
+      box-shadow: 0 20px 35px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s;
+    }
+
+    .content-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .section-title {
+      color: var(--primary);
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 60px;
+      height: 4px;
+      background: var(--secondary);
+      border-radius: 2px;
+    }
+
+    /* Stats Row */
+    .stats-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      gap: 2rem;
+      margin: 2rem 0;
+      text-align: center;
+    }
+
+    .stat-box {
+      flex: 1;
+      min-width: 150px;
+      background: rgba(128, 0, 0, 0.1);
+      padding: 1.5rem;
+      border-radius: 1.5rem;
+      transition: transform 0.3s;
+    }
+
+    .stat-box:hover {
+      transform: translateY(-5px);
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      color: #5a3a2a;
+    }
+
+    /* Info Grid */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+
+    .info-card {
+      background: white;
+      padding: 1.8rem;
+      border-radius: 1.5rem;
+      transition: all 0.3s;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .info-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+    }
+
+    .info-card i {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .info-card h3 {
+      color: var(--primary);
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Programs Grid */
+    .programs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+
+    .program-card {
+      background: white;
+      border-radius: 1.5rem;
+      overflow: hidden;
+      transition: all 0.4s;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .program-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 35px rgba(0, 0, 0, 0.15);
+    }
+
+    .program-header {
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      padding: 1.5rem;
+      color: white;
+      text-align: center;
+    }
+
+    .program-header i {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .program-header h3 {
+      font-size: 1.3rem;
+    }
+
+    .program-content {
+      padding: 1.5rem;
+    }
+
+    .program-content p {
+      color: #5a3a2a;
+      margin-bottom: 1rem;
+    }
+
+    .program-stats {
+      background: rgba(128, 0, 0, 0.05);
+      padding: 1rem;
+      border-radius: 1rem;
+      margin: 1rem 0;
+      text-align: center;
+    }
+
+    /* Success Story */
+    .success-story {
+      background: linear-gradient(135deg, rgba(128, 0, 0, 0.08), rgba(100, 50, 30, 0.08));
+      border-radius: 1.5rem;
+      padding: 2rem;
+      margin: 1.5rem 0;
+    }
+
+    .story-quote {
+      font-size: 1.1rem;
+      font-style: italic;
+      color: #3d2c24;
+    }
+
+    /* Needs Grid */
+    .needs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .need-item {
+      background: white;
+      padding: 1.2rem;
+      border-radius: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      transition: all 0.3s;
+    }
+
+    .need-item:hover {
+      transform: translateX(5px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .need-icon {
+      width: 50px;
+      height: 50px;
+      background: rgba(128, 0, 0, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: var(--primary);
+    }
+
+    .need-content h4 {
+      color: var(--primary);
+      margin-bottom: 0.3rem;
+    }
+
+    .need-content p {
+      font-size: 0.9rem;
+      color: #5a3a2a;
+    }
+
+    /* Testimonial */
+    .testimonial-card {
+      background: linear-gradient(135deg, rgba(128, 0, 0, 0.05), rgba(100, 50, 30, 0.05));
+      border-radius: 1.5rem;
+      padding: 2rem;
+      margin: 1.5rem 0;
+      text-align: center;
+    }
+
+    .testimonial-text {
+      font-size: 1.1rem;
+      font-style: italic;
+      color: #3d2c24;
+    }
+
+    .testimonial-author {
+      margin-top: 1rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+/* Footer */
+    .footer {
+      background: var(--dark);
+      backdrop-filter: blur(5px);
+      color: #f0e2d4;
+      padding: 3.5rem 0 2rem;
+      margin-top: 1rem;
+      border-top: 1px solid rgba(255, 200, 150, 0.3);
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2.5rem;
+    }
+    .footer h4 {
+      color: white;
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+    .footer a {
+      color: #e0b0b0;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    .footer a:hover {
+      color: white;
+      transform: translateX(5px);
+    }
+    .footer-bottom {
+      text-align: center;
+      padding-top: 1.8rem;
+      border-top: 1px solid #5f4b4b;
+    }
+    .back-to-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: var(--primary);
+      color: white;
+      padding: 0.8rem 1.3rem;
+      border-radius: 60px;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+     transition: all 0.3s;
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.4);
+      z-index: 99;
+      font-weight: bold;
+    }
+    .back-to-top:hover {
+      background: #9e3a3a;
+      transform: translateY(-5px);
+    }
+
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .menu-icon {
+        display: block;
+      }
+      .nav-links {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        background: rgba(46, 26, 26, 0.97);
+        backdrop-filter: blur(8px);
+        padding: 1.5rem;
+        border-radius: 2rem;
+        margin-top: 1rem;
+      }
+      .nav-links.show {
+        display: flex;
+      }
+      .dropdown {
+        width: 100%;
+      }
+      .dropdown-link-wrapper {
+        width: 100%;
+      }
+      .dropdown-content {
+        position: relative;
+        width: 100%;
+        background: #2b1a16;
+      }
+      .dropdown-content a {
+        color: #ffded0;
+      }
+      .nav-link {
+        width: 100%;
+        justify-content: center;
+      }
+      .btn {
+        width: 100%;
+        justify-content: center;
+      }
+      
+      .section-title::after {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      .section-title {
+        display: block;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 550px) {
+      .container {
+        padding: 0 1rem;
+      }
+      .content-card {
+        padding: 1.5rem;
+      }
+      .stats-row {
+        flex-direction: column;
+      }
+      .need-item {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="container nav-container">
+      <div class="logo">
+        <img src="images/logo.png" alt="Logo" class="logo-img" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'50\' height=\'50\' viewBox=\'0 0 50 50\'%3E%3Crect width=\'50\' height=\'50\' fill=\'%23800000\' rx=\'10\'/%3E%3Ctext x=\'8\' y=\'38\' fill=\'white\' font-size=\'35\'%3E🤝%3C/text%3E%3C/svg%3E'">
+        <span>Helping Hands Uganda</span>
+      </div>
+      <div class="menu-icon" id="menuToggle">
+        <i class="fas fa-bars"></i>
+      </div>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a>
+        <div class="dropdown" id="aboutDropdown">
+          <div class="dropdown-link-wrapper">
+            <a href="about.html" class="dropdown-text"><i class="fas fa-info-circle"></i> About Us</a>
+            <button class="dropdown-icon" aria-label="Toggle dropdown"><i class="fas fa-chevron-down"></i></button>
+          </div>
+          <div class="dropdown-content">
+            <a href="who-we-are.html">Who we are</a>
+            <a href="history.html">Our history</a>
+            <a href="mission-vision.html">Mission & Vision</a>
+            <a href="beneficiaries.html">Beneficiaries</a>
+            <a href="core-values.html">Core values</a>
+          </div>
+        </div>
+        <div class="dropdown" id="projectsDropdown">
+          <div class="dropdown-link-wrapper">
+            <a href="projects.html" class="dropdown-text active-home"><i class="fas fa-leaf"></i> Projects</a>
+            <button class="dropdown-icon" aria-label="Toggle dropdown"><i class="fas fa-chevron-down"></i></button>
+          </div>
+          <div class="dropdown-content">
+            <a href="orphan-care.html">Orphan care & shelter</a>
+            <a href="education-support.html">Education support</a>
+            <a href="women-empowerment.html">Women empowerment</a>
+            <a href="sacco-loans.html">SACCO & loans</a>
+            <a href="water-sanitation.html">Water & sanitation</a>
+            <a href="humanitarian-aid.html">Humanitarian aid</a>
+          </div>
+        </div>
+        <a href="gallery.html" class="nav-link"><i class="fas fa-images"></i> Gallery</a>
+        <a href="contact.html" class="nav-link"><i class="fas fa-envelope"></i> Contact Us</a>
+        <a href="donate.html" class="btn"><i class="fas fa-donate"></i> Donate now</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <section class="page-header">
+    <div class="container">
+      <h1>Women & Girls Empowerment</h1>
+      <p>Restoring dignity, building skills, and creating opportunities for a brighter future</p>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <section class="empowerment-section">
+    <div class="container">
+      
+      <!-- Introduction -->
+      <div class="content-card">
+        <h2 class="section-title">Empowering Women, Transforming Communities</h2>
+        <p style="font-size: 1.1rem; margin-bottom: 1rem;">Helping Hands Uganda runs comprehensive empowerment programs aimed at improving the livelihoods of women and girls. We believe that when women are empowered, entire communities are transformed.</p>
+        <p>Our programs address the unique challenges faced by women and girls in rural Uganda — from limited access to education and economic opportunities to social isolation and vulnerability to exploitation. Through skills training, mentorship, and economic empowerment initiatives, we help women build independence, confidence, and hope for the future.</p>
+        
+        <div class="stats-row">
+          <div class="stat-box">
+            <div class="stat-number">5</div>
+            <div class="stat-label">Sewing Machines</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-number">5+</div>
+            <div class="stat-label">Girls Trained Quarterly</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-number">2022</div>
+            <div class="stat-label">Program Started</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-number">Growing</div>
+            <div class="stat-label">Demand</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Our Programs -->
+      <div class="content-card">
+        <h2 class="section-title">Our Empowerment Programs</h2>
+        <div class="programs-grid">
+          
+          <!-- Tailoring Skills Training -->
+          <div class="program-card">
+            <div class="program-header">
+              <i class="fas fa-tshirt"></i>
+              <h3>Tailoring Skills Training</h3>
+            </div>
+            <div class="program-content">
+              <p>Our flagship program provides vocational training in tailoring and sewing. Young women who have dropped out of school learn practical skills that enable them to earn a living, support their families, and regain confidence.</p>
+              <div class="program-stats">
+                <strong>5 sewing machines</strong> | <strong>5 girls trained every 3 months</strong>
+              </div>
+              <p>Through the kindness of friends abroad, a GoFundMe campaign helped us acquire these machines, which we still use today. The demand continues to grow as more girls seek training.</p>
+            </div>
+          </div>
+
+          <!-- Mentorship Program -->
+          <div class="program-card">
+            <div class="program-header">
+              <i class="fas fa-chalkboard-user"></i>
+              <h3>Mentorship & Guidance</h3>
+            </div>
+            <div class="program-content">
+              <p>Our mentorship programs connect young women with role models who provide guidance, encouragement, and life skills training. Participants learn about goal-setting, self-confidence, and making positive life choices.</p>
+              <div class="program-stats">
+                <strong>Ongoing mentorship</strong> | <strong>Holistic support</strong>
+              </div>
+              <p>We believe that skills alone are not enough — women need confidence, support networks, and guidance to succeed. Our mentors walk alongside participants throughout their journey.</p>
+            </div>
+          </div>
+
+          <!-- Economic Empowerment -->
+          <div class="program-card">
+            <div class="program-header">
+              <i class="fas fa-hand-holding-usd"></i>
+              <h3>Economic Empowerment</h3>
+            </div>
+            <div class="program-content">
+              <p>Beyond skills training, we help women access small loans through our SACCO program, connect with markets for their products, and develop business skills to build sustainable livelihoods.</p>
+              <div class="program-stats">
+                <strong>SACCO membership</strong> | <strong>Business training</strong>
+              </div>
+              <p>Graduates of our tailoring program can earn income making clothes for their community, selling products, and building financial independence for themselves and their families.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- The Story Behind Our Program -->
+      <div class="content-card">
+        <h2 class="section-title">How It All Began</h2>
+        <p>In 2022, we realized that one of the most urgent problems in our community was the lack of opportunities for young girls who had dropped out of school. Many faced a future of limited options, early marriage, or economic dependence on others.</p>
+        <p style="margin-top: 1rem;">With no resources but a deep commitment to change, we started a small tailoring skills project. At first we had no sewing machines. But through the kindness of friends abroad, a GoFundMe campaign helped us acquire five sewing machines, which we still use today. With those machines, we began training groups of five girls every three months, giving them a skill that could help them earn a living and regain confidence.</p>
+        
+        <div class="success-story">
+          <i class="fas fa-quote-left" style="color: var(--primary); font-size: 2rem; opacity: 0.5;"></i>
+          <p class="story-quote">"I never thought I could learn a skill. Now I can make clothes for my family and even earn money. The training gave me confidence and hope for my future."</p>
+          <div class="testimonial-author" style="margin-top: 1rem;">— Program Graduate</div>
+        </div>
+        
+        <p>Today, the demand continues to grow as more girls seek training. Each quarter, we receive more applications than we can accommodate with our current resources. Our goal is to expand the program, acquire more machines, and train more women to become self-sufficient.</p>
+      </div>
+
+      <!-- Why Empowerment Matters -->
+      <div class="content-card">
+        <h2 class="section-title">Why Women's Empowerment Matters</h2>
+        <div class="info-grid">
+          <div class="info-card">
+            <i class="fas fa-chart-line"></i>
+            <h3>Economic Independence</h3>
+            <p>Empowered women can earn their own income, support their families, and contribute to the local economy. This creates a ripple effect of prosperity throughout the community.</p>
+          </div>
+          <div class="info-card">
+            <i class="fas fa-child"></i>
+            <h3>Better Outcomes for Children</h3>
+            <p>When women are educated and economically empowered, their children are more likely to attend school, stay healthy, and break the cycle of poverty.</p>
+          </div>
+          <div class="info-card">
+            <i class="fas fa-fist-raised"></i>
+            <h3>Reduced Vulnerability</h3>
+            <p>Women with skills and income are less vulnerable to exploitation, early marriage, and domestic abuse. Empowerment provides safety and dignity.</p>
+          </div>
+          <div class="info-card">
+            <i class="fas fa-users"></i>
+            <h3>Community Leadership</h3>
+            <p>Empowered women become leaders in their communities, advocating for change, mentoring others, and building stronger social structures.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Success Stories -->
+      <div class="content-card">
+        <h2 class="section-title">Stories of Transformation</h2>
+        
+        <div class="testimonial-card">
+          <i class="fas fa-quote-left" style="color: var(--primary); font-size: 2rem; opacity: 0.5;"></i>
+          <p class="testimonial-text">"Before the tailoring program, I had no way to support my children. Now I make and sell clothes in the village market. I can pay school fees and buy food. My children are proud of me, and I am proud of myself."</p>
+          <div class="testimonial-author">— Grace, Program Graduate & Small Business Owner</div>
+        </div>
+        
+        <div class="testimonial-card">
+          <i class="fas fa-quote-left" style="color: var(--primary); font-size: 2rem; opacity: 0.5;"></i>
+          <p class="testimonial-text">"I dropped out of school when I was 14. I thought my future was over. But Helping Hands Uganda gave me a second chance. Now I am learning tailoring, and I dream of opening my own shop one day."</p>
+          <div class="testimonial-author">— Sarah, Current Trainee</div>
+        </div>
+        
+        <div class="testimonial-card">
+          <i class="fas fa-quote-left" style="color: var(--primary); font-size: 2rem; opacity: 0.5;"></i>
+          <p class="testimonial-text">"The mentorship program changed my life. My mentor believed in me when I didn't believe in myself. She taught me that I am capable of achieving my dreams. Now I am training other young women in my community."</p>
+          <div class="testimonial-author">— Mary, Peer Mentor</div>
+        </div>
+      </div>
+
+      <!-- Urgent Needs -->
+      <div class="content-card">
+        <h2 class="section-title">How You Can Help</h2>
+        <p>To expand our empowerment programs and reach more women and girls, we urgently need:</p>
+        <div class="needs-grid">
+          <div class="need-item">
+            <div class="need-icon"><i class="fas fa-sewing-machine"></i></div>
+            <div class="need-content">
+              <h4>Additional Sewing Machines</h4>
+              <p>More machines = more girls trained each quarter</p>
+            </div>
+          </div>
+          <div class="need-item">
+            <div class="need-icon"><i class="fas fa-cut"></i></div>
+            <div class="need-content">
+              <h4>Fabric & Tailoring Materials</h4>
+              <p>Materials for training and starter kits for graduates</p>
+            </div>
+          </div>
+          <div class="need-item">
+            <div class="need-icon"><i class="fas fa-chalkboard"></i></div>
+            <div class="need-content">
+              <h4>Training Space</h4>
+              <p>Expanded workspace to accommodate more trainees</p>
+            </div>
+          </div>
+          <div class="need-item">
+            <div class="need-icon"><i class="fas fa-hand-holding-usd"></i></div>
+            <div class="need-content">
+              <h4>Starter Kits for Graduates</h4>
+              <p>Sewing machines, materials, and supplies for new businesses</p>
+            </div>
+          </div>
+          <div class="need-item">
+            <div class="need-icon"><i class="fas fa-chart-line"></i></div>
+            <div class="need-content">
+              <h4>Business Training</h4>
+              <p>Financial literacy and entrepreneurship workshops</p>
+            </div>
+          </div>
+          <div class="need-item">
+            <div class="need-icon"><i class="fas fa-female"></i></div>
+            <div class="need-content">
+              <h4>Mentorship Program Expansion</h4>
+              <p>Training more mentors to support women and girls</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Our Vision for the Future -->
+      <div class="content-card">
+        <h2 class="section-title">Our Vision for the Future</h2>
+        <div style="background: linear-gradient(135deg, rgba(128, 0, 0, 0.08), rgba(100, 50, 30, 0.08)); padding: 1.5rem; border-radius: 1rem;">
+          <i class="fas fa-graduation-cap" style="font-size: 2rem; color: var(--primary); margin-bottom: 1rem; display: inline-block;"></i>
+          <p>We dream of a future where every woman and girl in our community has the skills, confidence, and opportunities to build a life of dignity and independence. We envision:</p>
+          <ul style="margin-left: 1.5rem; margin-top: 1rem;">
+            <li><i class="fas fa-check-circle" style="color: var(--primary);"></i> A fully-equipped tailoring training center serving 50+ women annually</li>
+            <li><i class="fas fa-check-circle" style="color: var(--primary);"></i> A cooperative where graduates can sell their products and support one another</li>
+            <li><i class="fas fa-check-circle" style="color: var(--primary);"></i> Expanded mentorship programs reaching girls in schools across the district</li>
+            <li><i class="fas fa-check-circle" style="color: var(--primary);"></i> Economic empowerment programs that help women start and grow their own businesses</li>
+          </ul>
+          <p style="margin-top: 1rem;">With your support, this vision can become a reality. Together, we can transform the lives of women and girls — and build stronger, more resilient communities for generations to come.</p>
+        </div>
+      </div>
+
+      <!-- Call to Action -->
+      <div class="content-card" style="text-align: center; background: linear-gradient(135deg, rgba(128,0,0,0.95), rgba(100,50,30,0.95)); color: white;">
+        <h2 style="color: white; margin-bottom: 1rem;">Empower a Woman, Transform a Community</h2>
+        <p style="margin-bottom: 1.5rem;">Your support can provide a woman with the skills, tools, and confidence to build a better life for herself and her family. Join us in creating lasting change.</p>
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+          <a href="donate.html" style="background: #ffb347; color: #2d1b0c; padding: 0.8rem 2rem; border-radius: 60px; text-decoration: none; font-weight: bold;"><i class="fas fa-donate"></i> Sponsor a Trainee</a>
+          <a href="contact.html" style="background: transparent; border: 2px solid white; color: white; padding: 0.8rem 2rem; border-radius: 60px; text-decoration: none; font-weight: bold;"><i class="fas fa-hand-holding-heart"></i> Donate Supplies</a>
+          <a href="gallery.html" style="background: transparent; border: 2px solid white; color: white; padding: 0.8rem 2rem; border-radius: 60px; text-decoration: none; font-weight: bold;"><i class="fas fa-images"></i> See Our Work</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+   <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div><h4><i class="fas fa-hand-holding-heart"></i> Helping Hands Uganda</h4><p>Humya 1, LC I<br>Buhundu Parish<br>Bukonzo Subcounty<br>Bundibugyo District, Uganda</p></div>
+        <div><h4>Quick Links</h4><a href="about.html">About Us</a><a href="projects.html">Our Projects</a><a href="gallery.html">Gallery</a><a href="contact.html">Contact</a></div>
+        <div><h4>Contact Info</h4><a href="tel:+256764377294"><i class="fas fa-phone"></i> +256 764377294</a><a href="mailto:info@helpinghandsug.org"><i class="fas fa-envelope"></i> info@helpinghandsug.org</a></div>
+        <div><h4>Connect With Us</h4><div style="font-size: 1.8rem; letter-spacing: 0.5rem;"><i class="fab fa-facebook"></i><i class="fab fa-x-twitter"></i><i class="fab fa-instagram"></i><i class="fab fa-whatsapp"></i></div></div>
+      </div>
+      <div class="footer-bottom"><p>© 2025 Helping Hands Uganda. All rights reserved.</p><p>Registered Community Based Organization - Bundibugyo District, Uganda</p></div>
+    </div>
+  </footer>
+  <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i> Back to top</a>
+
+  <script>
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    const dropdowns = document.querySelectorAll('.dropdown');
+
+    if (menuToggle) {
+      menuToggle.addEventListener('click', function(e) {
+        e.stopPropagation();
+        navLinks.classList.toggle('show');
+      });
+    }
+
+    dropdowns.forEach(function(dropdown) {
+      const iconBtn = dropdown.querySelector('.dropdown-icon');
+      if (iconBtn) {
+        iconBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          dropdowns.forEach(d => { if (d !== dropdown) d.classList.remove('active'); });
+          dropdown.classList.toggle('active');
+        });
+      }
+    });
+
+    document.addEventListener('click', function(e) {
+      let inside = false;
+      dropdowns.forEach(d => { if (d.contains(e.target)) inside = true; });
+      if (!inside && menuToggle && !menuToggle.contains(e.target)) {
+        dropdowns.forEach(d => d.classList.remove('active'));
+        if (navLinks) navLinks.classList.remove('show');
+      }
+    });
+
+    // Back to top
+    const backToTop = document.querySelector('.back-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) backToTop.style.opacity = '1';
+      else backToTop.style.opacity = '0.9';
+    });
+  </script>
+</body>
+</html>

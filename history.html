@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <link rel="icon" type="image/png" href="images/logo.png">
+  <title>Helping Hands Uganda | Our History</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+   :root {
+      --primary: #800000;
+      --primary-light: #a04545;
+      --secondary: #6b2d2d;
+      --accent: #a52a2a;
+      --dark: #330000;
+      --soft-bg: rgba(254, 248, 242, 0.94);
+      --shadow: 0 8px 20px rgba(100, 30, 0, 0.12);
+      --nav-bg: rgb(238, 219, 219);
+      --dropdown-bg: #ffffff;
+    }
+
+    body {
+      background: url('https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover fixed no-repeat;
+      font-family: 'Times New Roman', Times, serif;
+      line-height: 1.6;
+      color: #1f1a17;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(2px);
+      z-index: -2;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+  /* NAVBAR with beautiful background color */
+    .navbar {
+      background: var(--nav-bg);
+      box-shadow: var(--shadow);
+      padding: 0.5rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      width: 100%;
+
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: clamp(1.2rem, 4vw, 1.8rem);
+        color: var(--primary);
+    }
+
+    .logo-img {
+      height: 50px;
+      width: auto;
+      border-radius: 8px;
+      background: white;
+      padding: 3px;
+    }
+
+    .menu-icon {
+      display: none;
+      font-size: 2.4rem;
+      color: var(--primary);
+      cursor: pointer;
+      padding: 0.5rem 1rem;
+      transition: transform 0.2s;
+    }
+
+    .menu-icon:hover {
+      transform: scale(1.05);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .nav-link {
+      font-size: 1rem;
+      padding: 0.7rem 1.3rem;
+      border-radius: 40px;
+       color: var(--dark);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.3s;
+      font-weight: 500;
+    }
+
+    .nav-link:hover {
+      background: rgba(128,0,0,0.08);
+       transform: translateY(-2px);
+    }
+
+    .nav-link.active-home {
+      background: var(--primary);
+      color: white !important;
+       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Dropdown styles */
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-link-wrapper {
+      display: flex;
+      align-items: center;
+      background: transparent;
+      border-radius: 40px;
+      overflow: hidden;
+    }
+
+    .dropdown-text {
+      font-size: 1rem;
+      padding: 0.7rem 0.5rem 0.7rem 1.3rem;
+      color: var(--dark);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 500;
+    }
+
+    .dropdown-text:hover {
+      background: rgba(128,0,0,0.08);
+    }
+
+    .dropdown-icon {
+      font-size: 1rem;
+      padding: 0.7rem 1.3rem 0.7rem 0.5rem;
+      color: var(--dark);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .dropdown-icon i {
+      font-size: 0.7rem;
+      transition: transform 0.2s;
+    }
+
+    .dropdown.active .dropdown-icon i {
+      transform: rotate(180deg);
+    }
+ .dropdown-icon:hover {
+      background: rgba(128,0,0,0.08);
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      min-width: 240px;
+      background: var(--dropdown-bg);
+      border-radius: 20px;
+      box-shadow: 0 20px 35px rgba(0, 0, 0, 0.2);
+      padding: 0.8rem 0;
+      z-index: 1000;
+      margin-top: 5px;
+      border: 1px solid #f0e0e0;
+    }
+
+    .dropdown.active .dropdown-content {
+      display: block;
+    }
+
+    .dropdown-content a {
+      color: var(--dark);
+      padding: 0.8rem 1.8rem;
+      text-decoration: none;
+      display: block;
+      transition: all 0.2s;
+    }
+
+    .dropdown-content a:hover {
+      background: #f0e6e0;
+      color: var(--primary);
+      padding-left: 2rem;
+    }
+
+    .btn {
+      padding: 0.7rem 1.6rem;
+      border-radius: 60px;
+      background: linear-gradient(135deg, #ffb347, #ff8c1a);
+      color: #2d1b0c;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-left: 0.3rem;
+      font-weight: bold;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+      background: linear-gradient(135deg, #ffc26b, #ffa133);
+    }
+
+    /* Page Header */
+    .page-header {
+      background: linear-gradient(135deg, #6d2e2e 0%, #4d1f1f 100%);
+      color: white;
+      padding: 4rem 0 3.5rem;
+      text-align: center;
+      border-bottom-left-radius: 3rem;
+      border-bottom-right-radius: 3rem;
+      margin: 1.5rem 0 2rem 0;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
+    }
+
+    .page-header h1 {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .page-header p {
+      font-size: 1.3rem;
+      max-width: 700px;
+      margin: 0 auto;
+      opacity: 0.95;
+    }
+
+    /* History Content */
+    .history-section {
+      padding: 2rem 0 5rem;
+    }
+
+    .content-card {
+      background: rgba(255, 252, 245, 0.95);
+      backdrop-filter: blur(4px);
+      border-radius: 2rem;
+      padding: 2.5rem;
+      margin-bottom: 2.5rem;
+      box-shadow: 0 20px 35px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s;
+    }
+
+    .content-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .section-title {
+      color: var(--primary);
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 60px;
+      height: 4px;
+      background: var(--secondary);
+      border-radius: 2px;
+    }
+
+    /* Timeline Styles */
+    .timeline {
+      position: relative;
+      padding: 2rem 0;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(to bottom, var(--primary), var(--gold), var(--primary));
+      border-radius: 2px;
+    }
+
+    .timeline-item {
+      display: flex;
+      justify-content: flex-end;
+      padding-right: 3rem;
+      position: relative;
+      margin-bottom: 3rem;
+      width: 50%;
+    }
+
+    .timeline-item:nth-child(even) {
+      align-self: flex-end;
+      justify-content: flex-start;
+      padding-left: 3rem;
+      padding-right: 0;
+      margin-left: auto;
+    }
+
+    .timeline-content {
+      background: white;
+      border-radius: 1.5rem;
+      padding: 1.5rem;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      position: relative;
+      transition: all 0.3s;
+    }
+
+    .timeline-content:hover {
+      transform: scale(1.02);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+    }
+
+    .timeline-year {
+      display: inline-block;
+      background: var(--primary);
+      color: white;
+      padding: 0.3rem 1rem;
+      border-radius: 60px;
+      font-weight: bold;
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+    }
+
+    .timeline-content h3 {
+      color: var(--primary);
+      font-size: 1.3rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .timeline-content p {
+      color: #5a3a2a;
+      line-height: 1.7;
+    }
+
+    .timeline-icon {
+      position: absolute;
+      top: 20px;
+      width: 40px;
+      height: 40px;
+      background: var(--primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.2rem;
+      box-shadow: 0 0 0 4px rgba(128, 0, 0, 0.2);
+    }
+
+    .timeline-item:nth-child(odd) .timeline-icon {
+      right: -20px;
+    }
+
+    .timeline-item:nth-child(even) .timeline-icon {
+      left: -20px;
+    }
+
+    /* Milestone Cards */
+    .milestone-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+
+    .milestone-card {
+      background: white;
+      border-radius: 1.5rem;
+      padding: 1.8rem;
+      text-align: center;
+      transition: all 0.3s;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .milestone-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 16px 28px rgba(0, 0, 0, 0.15);
+    }
+
+    .milestone-year {
+      font-size: 2rem;
+      font-weight: bold;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .milestone-icon {
+      font-size: 2.5rem;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+
+    .milestone-card h4 {
+      color: var(--primary);
+      font-size: 1.2rem;
+      margin-bottom: 0.8rem;
+    }
+
+    /* Stats Row */
+    .stats-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      gap: 2rem;
+      margin: 2rem 0;
+      text-align: center;
+    }
+
+    .stat-box {
+      flex: 1;
+      min-width: 150px;
+      background: rgba(128, 0, 0, 0.1);
+      padding: 1.5rem;
+      border-radius: 1.5rem;
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      color: #5a3a2a;
+    }
+
+    /* Founder Quote */
+    .founder-quote {
+      background: linear-gradient(135deg, rgba(128, 0, 0, 0.08), rgba(100, 50, 30, 0.08));
+      padding: 2rem;
+      border-left: 5px solid var(--primary);
+      border-radius: 1.5rem;
+      margin: 1.5rem 0;
+      font-style: italic;
+      font-size: 1.1rem;
+    }
+/* Footer */
+    .footer {
+      background: var(--dark);
+      backdrop-filter: blur(5px);
+      color: #f0e2d4;
+      padding: 3.5rem 0 2rem;
+      margin-top: 1rem;
+      border-top: 1px solid rgba(255, 200, 150, 0.3);
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2.5rem;
+    }
+    .footer h4 {
+      color: white;
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+    .footer a {
+      color: #e0b0b0;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    .footer a:hover {
+      color: white;
+      transform: translateX(5px);
+    }
+    .footer-bottom {
+      text-align: center;
+      padding-top: 1.8rem;
+      border-top: 1px solid #5f4b4b;
+    }
+    .back-to-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: var(--primary);
+      color: white;
+      padding: 0.8rem 1.3rem;
+      border-radius: 60px;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+     transition: all 0.3s;
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.4);
+      z-index: 99;
+      font-weight: bold;
+    }
+    .back-to-top:hover {
+      background: #9e3a3a;
+      transform: translateY(-5px);
+    }
+
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .menu-icon {
+        display: block;
+      }
+      .nav-links {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        background: rgba(46, 26, 26, 0.97);
+        backdrop-filter: blur(8px);
+        padding: 1.5rem;
+        border-radius: 2rem;
+        margin-top: 1rem;
+      }
+      .nav-links.show {
+        display: flex;
+      }
+      .dropdown {
+        width: 100%;
+      }
+      .dropdown-link-wrapper {
+        width: 100%;
+      }
+      .dropdown-content {
+        position: relative;
+        width: 100%;
+        background: #2b1a16;
+      }
+      .dropdown-content a {
+        color: #ffded0;
+      }
+      .nav-link {
+        width: 100%;
+        justify-content: center;
+      }
+      .btn {
+        width: 100%;
+        justify-content: center;
+      }
+      
+      .timeline::before {
+        left: 20px;
+      }
+      .timeline-item {
+        width: 100%;
+        padding-left: 3rem;
+        padding-right: 0;
+        justify-content: flex-start;
+      }
+      .timeline-item:nth-child(even) {
+        padding-left: 3rem;
+        margin-left: 0;
+      }
+      .timeline-item:nth-child(odd) .timeline-icon,
+      .timeline-item:nth-child(even) .timeline-icon {
+        left: -20px;
+        right: auto;
+      }
+      .section-title::after {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      .section-title {
+        display: block;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 550px) {
+      .container {
+        padding: 0 1rem;
+      }
+      .content-card {
+        padding: 1.5rem;
+      }
+      .timeline-content {
+        padding: 1rem;
+      }
+      .timeline-content h3 {
+        font-size: 1.1rem;
+      }
+      .stats-row {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="container nav-container">
+      <div class="logo">
+        <img src="images/logo.png" alt="Logo" class="logo-img" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'50\' height=\'50\' viewBox=\'0 0 50 50\'%3E%3Crect width=\'50\' height=\'50\' fill=\'%23800000\' rx=\'10\'/%3E%3Ctext x=\'8\' y=\'38\' fill=\'white\' font-size=\'35\'%3E🤝%3C/text%3E%3C/svg%3E'">
+        <span>Helping Hands Uganda</span>
+      </div>
+      <div class="menu-icon" id="menuToggle">
+        <i class="fas fa-bars"></i>
+      </div>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a>
+        <div class="dropdown" id="aboutDropdown">
+          <div class="dropdown-link-wrapper">
+            <a href="about.html" class="dropdown-text"><i class="fas fa-info-circle"></i> About Us</a>
+            <button class="dropdown-icon" aria-label="Toggle dropdown"><i class="fas fa-chevron-down"></i></button>
+          </div>
+          <div class="dropdown-content">
+            <a href="who-we-are.html">Who we are</a>
+            <a href="history.html">Our history</a>
+            <a href="mission-vision.html">Mission & Vision</a>
+            <a href="beneficiaries.html">Beneficiaries</a>
+            <a href="core-values.html">Core values</a>
+          </div>
+        </div>
+        <div class="dropdown" id="projectsDropdown">
+          <div class="dropdown-link-wrapper">
+            <a href="projects.html" class="dropdown-text"><i class="fas fa-leaf"></i> Projects</a>
+            <button class="dropdown-icon" aria-label="Toggle dropdown"><i class="fas fa-chevron-down"></i></button>
+          </div>
+          <div class="dropdown-content">
+            <a href="orphan-care.html">Orphan care & shelter</a>
+            <a href="education-support.html">Education support</a>
+            <a href="women-empowerment.html">Women empowerment</a>
+            <a href="sacco-loans.html">SACCO & loans</a>
+            <a href="water-sanitation.html">Water & sanitation</a>
+            <a href="humanitarian-aid.html">Humanitarian aid</a>
+          </div>
+        </div>
+        <a href="gallery.html" class="nav-link"><i class="fas fa-images"></i> Gallery</a>
+        <a href="contact.html" class="nav-link"><i class="fas fa-envelope"></i> Contact Us</a>
+        <a href="donate.html" class="btn"><i class="fas fa-donate"></i> Donate now</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <section class="page-header">
+    <div class="container">
+      <h1>Our History</h1>
+      <p>A journey of compassion, resilience, and hope — from a small idea to a growing movement</p>
+    </div>
+  </section>
+
+  <!-- History Content -->
+  <section class="history-section">
+    <div class="container">
+      
+      <!-- Origins Story -->
+      <div class="content-card">
+        <h2 class="section-title">The Beginning</h2>
+        <p style="font-size: 1.1rem; margin-bottom: 1rem;">Helping Hands Uganda was born from the hardships of the COVID-19 pandemic and the lived experiences of its founder, Bukama Hakim.</p>
+        <p>In the rural communities of Bundibugyo District, the pandemic brought unprecedented challenges. Schools closed for long periods, families lost their incomes, and hunger became widespread. Children never returned to school. Young girls were married off early. Teenage pregnancies increased. Some children were abandoned or forced onto the streets.</p>
+        <div class="founder-quote">
+          <i class="fas fa-quote-left" style="color: var(--primary); margin-right: 10px;"></i>
+          It was painful to watch, knowing how easily a young life can be redirected by circumstances. As a humanist, I believe that every person deserves dignity, opportunity, and compassion. I could not change the whole world, but I knew I had to begin somewhere.
+          <i class="fas fa-quote-right" style="color: var(--primary); margin-left: 10px;"></i>
+          <div style="margin-top: 10px; font-style: normal;">— Bukama Hakim, Founder</div>
+        </div>
+        <p>In 2022, the first step was taken. A small gardening project was started, planting food crops and sharing the harvest with vulnerable families in the village. It wasn't much, but it reminded people that someone cared. This simple act of compassion planted the seed for what would become Helping Hands Uganda.</p>
+      </div>
+
+      <!-- Timeline Journey -->
+      <div class="content-card">
+        <h2 class="section-title">Our Journey Through Time</h2>
+        <div class="timeline">
+          
+          <div class="timeline-item">
+            <div class="timeline-icon"><i class="fas fa-seedling"></i></div>
+            <div class="timeline-content">
+              <span class="timeline-year">2022</span>
+              <h3>The Seed is Planted</h3>
+              <p>Bukama Hakim starts a small gardening project in Katumba Village, sharing harvests with vulnerable families. The idea of organized community support begins to take root. The first informal community gatherings identify the urgent needs of orphaned children and girls who dropped out of school.</p>
+            </div>
+          </div>
+          
+          <div class="timeline-item">
+            <div class="timeline-icon"><i class="fas fa-tshirt"></i></div>
+            <div class="timeline-content">
+              <span class="timeline-year">Early 2023</span>
+              <h3>Tailoring Skills Program Begins</h3>
+              <p>Recognizing the lack of opportunities for young girls who had dropped out of school, a tailoring skills project is launched. With support from friends abroad through a GoFundMe campaign, five sewing machines are acquired. The program begins training groups of five girls every three months, giving them skills to earn a living and regain confidence.</p>
+            </div>
+          </div>
+          
+          <div class="timeline-item">
+            <div class="timeline-icon"><i class="fas fa-calendar-alt"></i></div>
+            <div class="timeline-content">
+              <span class="timeline-year">17 December 2023</span>
+              <h3>Official Founding</h3>
+              <p>Helping Hands Uganda is formally established as a Community Based Organization (CBO). Fifteen founding members come together to formalize the organization's vision and mission. The constitutional meeting takes place, setting the legal foundation for the organization's work.</p>
+            </div>
+          </div>
+          
+          <div class="timeline-item">
+            <div class="timeline-icon"><i class="fas fa-file-signature"></i></div>
+            <div class="timeline-content">
+              <span class="timeline-year">18 January 2024</span>
+              <h3>Constitution Comes into Force</h3>
+              <p>The constitution of Helping Hands Uganda is officially adopted and comes into force. The organization's governing structure is established, with Bukama Hakim as Chairperson, Masika Darlyn as Secretary, and Muhindo Brian Kahigwa as Treasurer. Registration with Bundibugyo District authorities is completed.</p>
+            </div>
+          </div>
+          
+          <div class="timeline-item">
+            <div class="timeline-icon"><i class="fas fa-child"></i></div>
+            <div class="timeline-content">
+              <span class="timeline-year">2024</span>
+              <h3>Expanding Care for Orphaned Children</h3>
+              <p>The organization begins caring for orphaned and abandoned children. Today, ten orphaned children live under direct care, while others are supported in foster families. The need for a safe, permanent home becomes urgent as the current shelter is old, overcrowded, and structurally unsafe. Planning begins for a new orphan home.</p>
+            </div>
+          </div>
+          
+          <div class="timeline-item">
+            <div class="timeline-icon"><i class="fas fa-school"></i></div>
+            <div class="timeline-content">
+              <span class="timeline-year">2024</span>
+              <h3>Education Support Program</h3>
+              <p>Through donor support, Masika Ritah, one of the vulnerable children, is successfully enrolled in school. The Education Support Program formalizes efforts to provide scholastic materials, school supplies, and tuition support to vulnerable children. The program continues to identify children in need of educational assistance.</p>
+            </div>
+          </div>
+          
+          <div class="timeline-item">
+            <div class="timeline-icon"><i class="fas fa-hand-holding-usd"></i></div>
+            <div class="timeline-content">
+              <span class="timeline-year">2024</span>
+              <h3>Community SACCO Launched</h3>
+              <p>Helping Hands Uganda establishes a community savings and credit initiative (SACCO) serving 20 members including farmers and small business owners. The program provides small loans to help members invest in farming and small enterprises, promoting economic self-reliance within the community.</p>
+            </div>
+          </div>
+          
+          <div class="timeline-item">
+            <div class="timeline-icon"><i class="fas fa-building"></i></div>
+            <div class="timeline-content">
+              <span class="timeline-year">Present</span>
+              <h3>Building the Future</h3>
+              <p>Construction begins on a new orphan home to provide safe, stable housing for children in care. The organization continues to expand its women's empowerment programs, water and sanitation projects, and humanitarian assistance. Partnerships with local and international organizations grow, strengthening the impact of all programs.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Key Milestones -->
+      <div class="content-card">
+        <h2 class="section-title">Key Milestones</h2>
+        <div class="milestone-grid">
+          <div class="milestone-card">
+            <div class="milestone-year">2022</div>
+            <div class="milestone-icon"><i class="fas fa-seedling"></i></div>
+            <h4>First Initiative</h4>
+            <p>Gardening project started to support vulnerable families in Katumba Village</p>
+          </div>
+          <div class="milestone-card">
+            <div class="milestone-year">2023</div>
+            <div class="milestone-icon"><i class="fas fa-tshirt"></i></div>
+            <h4>Tailoring Program</h4>
+            <p>Five sewing machines acquired, first girls trained in vocational skills</p>
+          </div>
+          <div class="milestone-card">
+            <div class="milestone-year">Dec 2023</div>
+            <div class="milestone-icon"><i class="fas fa-file-contract"></i></div>
+            <h4>Official Registration</h4>
+            <p>Helping Hands Uganda registered as CBO with 15 founding members</p>
+          </div>
+          <div class="milestone-card">
+            <div class="milestone-year">2024</div>
+            <div class="milestone-icon"><i class="fas fa-child"></i></div>
+            <h4>Orphan Care</h4>
+            <p>10 orphaned children under direct care; new orphan home construction begins</p>
+          </div>
+          <div class="milestone-card">
+            <div class="milestone-year">2024</div>
+            <div class="milestone-icon"><i class="fas fa-graduation-cap"></i></div>
+            <h4>Education Support</h4>
+            <p>First child enrolled through donor support; formal education program launched</p>
+          </div>
+          <div class="milestone-card">
+            <div class="milestone-year">2024</div>
+            <div class="milestone-icon"><i class="fas fa-hand-holding-usd"></i></div>
+            <h4>SACCO Initiative</h4>
+            <p>Community savings and credit program serving 20 local members</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Growth Stats -->
+      <div class="content-card">
+        <h2 class="section-title">Our Growth</h2>
+        <div class="stats-row">
+          <div class="stat-box">
+            <div class="stat-number">2022</div>
+            <div class="stat-label">Year Founded</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-number">15</div>
+            <div class="stat-label">Founding Members</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-number">10+</div>
+            <div class="stat-label">Children in Care</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-number">20+</div>
+            <div class="stat-label">SACCO Members</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-number">5</div>
+            <div class="stat-label">Sewing Machines</div>
+          </div>
+        </div>
+        <div class="stats-row">
+          <div class="stat-box">
+            <div class="stat-number">3+</div>
+            <div class="stat-label">Girls Trained Quarterly</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-number">Under Construction</div>
+            <div class="stat-label">New Orphan Home</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Founder's Personal Journey -->
+      <div class="content-card">
+        <h2 class="section-title">The Founder's Journey</h2>
+        <div class="founder-quote" style="background: linear-gradient(135deg, rgba(128, 0, 0, 0.1), rgba(100, 50, 30, 0.1));">
+          <i class="fas fa-quote-left" style="color: var(--primary); margin-right: 10px;"></i>
+          I was born into a life that taught me very early what vulnerability feels like. My mother, married at just 21, faced deep challenges. When I was seven years old, she made the difficult decision to leave the marriage to protect her children. Those experiences left deep memories that still guide my actions today.
+          <i class="fas fa-quote-right" style="color: var(--primary); margin-left: 10px;"></i>
+        </div>
+        <p>Bukama Hakim's personal story of hardship, resilience, and hope is the foundation upon which Helping Hands Uganda is built. Having experienced displacement, struggle, and the challenges of growing up with limited resources, he understands the needs of vulnerable children and families on a deeply personal level.</p>
+        <p>Today, as Chairperson of Helping Hands Uganda, Bukama continues to lead with compassion, integrity, and an unwavering commitment to serving others. His vision for a permanent orphan home, expanded education programs, and sustainable community development drives the organization forward.</p>
+        <div class="stats-row" style="margin-top: 1.5rem;">
+          <div class="stat-box">
+            <div class="stat-number">2022</div>
+            <div class="stat-label">Vision Born</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-number">10+</div>
+            <div class="stat-label">Children Personally Cared For</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Constitutional Foundation -->
+      <div class="content-card">
+        <h2 class="section-title">Constitutional Foundation</h2>
+        <p>On <strong>17 December 2023</strong>, the founding members of Helping Hands Uganda adopted the organization's constitution. This document established the legal and operational framework that guides all activities. The constitution came into force on <strong>18 January 2024</strong> after approval by the founding members.</p>
+        <p style="margin-top: 1rem;"><strong>Key constitutional principles include:</strong></p>
+        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+          <li>Non-profit and charitable operations</li>
+          <li>Transparency and accountability in all activities</li>
+          <li>Community participation and empowerment</li>
+          <li>Two authorized signatories for all financial transactions</li>
+          <li>Annual General Meetings as the highest decision-making body</li>
+          <li>Commitment to serving vulnerable communities across Uganda</li>
+        </ul>
+      </div>
+
+      <!-- Looking Forward -->
+      <div class="content-card" style="text-align: center; background: linear-gradient(135deg, rgba(128,0,0,0.95), rgba(100,50,30,0.95)); color: white;">
+        <h2 style="color: white; margin-bottom: 1rem;">Looking to the Future</h2>
+        <p style="margin-bottom: 1rem;">As we continue our journey, we remain committed to building a permanent orphan home, expanding education support, strengthening women's empowerment, and creating sustainable opportunities for vulnerable communities across Uganda.</p>
+        <p style="margin-bottom: 1.5rem;">Every step forward is made possible by compassionate supporters like you.</p>
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+          <a href="donate.html" style="background: #ffb347; color: #2d1b0c; padding: 0.8rem 2rem; border-radius: 60px; text-decoration: none; font-weight: bold;"><i class="fas fa-donate"></i> Support Our Work</a>
+          <a href="contact.html" style="background: transparent; border: 2px solid white; color: white; padding: 0.8rem 2rem; border-radius: 60px; text-decoration: none; font-weight: bold;"><i class="fas fa-envelope"></i> Partner With Us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+   <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div><h4><i class="fas fa-hand-holding-heart"></i> Helping Hands Uganda</h4><p>Humya 1, LC I<br>Buhundu Parish<br>Bukonzo Subcounty<br>Bundibugyo District, Uganda</p></div>
+        <div><h4>Quick Links</h4><a href="about.html">About Us</a><a href="projects.html">Our Projects</a><a href="gallery.html">Gallery</a><a href="contact.html">Contact</a></div>
+        <div><h4>Contact Info</h4><a href="tel:+256764377294"><i class="fas fa-phone"></i> +256 764377294</a><a href="mailto:info@helpinghandsug.org"><i class="fas fa-envelope"></i> info@helpinghandsug.org</a></div>
+        <div><h4>Connect With Us</h4><div style="font-size: 1.8rem; letter-spacing: 0.5rem;"><i class="fab fa-facebook"></i><i class="fab fa-x-twitter"></i><i class="fab fa-instagram"></i><i class="fab fa-whatsapp"></i></div></div>
+      </div>
+      <div class="footer-bottom"><p>© 2025 Helping Hands Uganda. All rights reserved.</p><p>Registered Community Based Organization - Bundibugyo District, Uganda</p></div>
+    </div>
+  </footer>
+  <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i> Back to top</a>
+
+  <script>
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    const dropdowns = document.querySelectorAll('.dropdown');
+
+    if (menuToggle) {
+      menuToggle.addEventListener('click', function(e) {
+        e.stopPropagation();
+        navLinks.classList.toggle('show');
+      });
+    }
+
+    dropdowns.forEach(function(dropdown) {
+      const iconBtn = dropdown.querySelector('.dropdown-icon');
+      if (iconBtn) {
+        iconBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          dropdowns.forEach(d => { if (d !== dropdown) d.classList.remove('active'); });
+          dropdown.classList.toggle('active');
+        });
+      }
+    });
+
+    document.addEventListener('click', function(e) {
+      let inside = false;
+      dropdowns.forEach(d => { if (d.contains(e.target)) inside = true; });
+      if (!inside && menuToggle && !menuToggle.contains(e.target)) {
+        dropdowns.forEach(d => d.classList.remove('active'));
+        if (navLinks) navLinks.classList.remove('show');
+      }
+    });
+
+    // Back to top
+    const backToTop = document.querySelector('.back-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) backToTop.style.opacity = '1';
+      else backToTop.style.opacity = '0.9';
+    });
+  </script>
+</body>
+</html>

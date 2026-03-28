@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <link rel="icon" type="image/png" href="images/logo.png">
+  <title>Helping Hands Uganda | Contact Us with Map</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #800000;
+      --primary-light: #a04545;
+      --secondary: #6b2d2d;
+      --accent: #a52a2a;
+      --dark: #330000;
+      --soft-bg: rgba(254, 248, 242, 0.94);
+      --shadow: 0 8px 20px rgba(100, 30, 0, 0.12);
+      --nav-bg: rgb(238, 219, 219);
+      --dropdown-bg: #ffffff;
+    }
+
+    /* ===== WHOLE PAGE BACKGROUND IMAGE ===== */
+    body {
+      background: url('https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover fixed no-repeat;
+      font-family: 'Times New Roman', Times, serif;
+      line-height: 1.6;
+      color: #1f1a17;
+      position: relative;
+    }
+
+    /* Semi-transparent overlay for readability */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.55);
+      backdrop-filter: blur(2px);
+      z-index: -2;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* NAVBAR with beautiful background color */
+    .navbar {
+      background: var(--nav-bg);
+      box-shadow: var(--shadow);
+      padding: 0.5rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      width: 100%;
+
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: clamp(1.2rem, 4vw, 1.8rem);
+        color: var(--primary);
+    }
+
+    .logo-img {
+      height: 50px;
+      width: auto;
+      border-radius: 8px;
+      background: white;
+      padding: 3px;
+    }
+
+    .menu-icon {
+      display: none;
+      font-size: 2.4rem;
+      color: var(--primary);
+      cursor: pointer;
+      padding: 0.5rem 1rem;
+      transition: transform 0.2s;
+    }
+
+    .menu-icon:hover {
+      transform: scale(1.05);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .nav-link {
+      font-size: 1rem;
+      padding: 0.7rem 1.3rem;
+      border-radius: 40px;
+       color: var(--dark);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.3s;
+      font-weight: 500;
+    }
+
+    .nav-link:hover {
+      background: rgba(128,0,0,0.08);
+       transform: translateY(-2px);
+    }
+
+    .nav-link.active-home {
+      background: var(--primary);
+      color: white !important;
+       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Dropdown styles */
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-link-wrapper {
+      display: flex;
+      align-items: center;
+      background: transparent;
+      border-radius: 40px;
+      overflow: hidden;
+    }
+
+    .dropdown-text {
+      font-size: 1rem;
+      padding: 0.7rem 0.5rem 0.7rem 1.3rem;
+      color: var(--dark);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 500;
+    }
+
+    .dropdown-text:hover {
+      background: rgba(128,0,0,0.08);
+    }
+
+    .dropdown-icon {
+      font-size: 1rem;
+      padding: 0.7rem 1.3rem 0.7rem 0.5rem;
+      color: var(--dark);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .dropdown-icon i {
+      font-size: 0.7rem;
+      transition: transform 0.2s;
+    }
+
+    .dropdown.active .dropdown-icon i {
+      transform: rotate(180deg);
+    }
+ .dropdown-icon:hover {
+      background: rgba(128,0,0,0.08);
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      min-width: 240px;
+      background: var(--dropdown-bg);
+      border-radius: 20px;
+      box-shadow: 0 20px 35px rgba(0, 0, 0, 0.2);
+      padding: 0.8rem 0;
+      z-index: 1000;
+      margin-top: 5px;
+      border: 1px solid #f0e0e0;
+    }
+
+    .dropdown.active .dropdown-content {
+      display: block;
+    }
+
+    .dropdown-content a {
+      color: var(--dark);
+      padding: 0.8rem 1.8rem;
+      text-decoration: none;
+      display: block;
+      transition: all 0.2s;
+    }
+
+    .dropdown-content a:hover {
+      background: #f0e6e0;
+      color: var(--primary);
+      padding-left: 2rem;
+    }
+
+    .btn {
+      padding: 0.7rem 1.6rem;
+      border-radius: 60px;
+      background: linear-gradient(135deg, #ffb347, #ff8c1a);
+      color: #2d1b0c;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-left: 0.3rem;
+      font-weight: bold;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+      background: linear-gradient(135deg, #ffc26b, #ffa133);
+    }
+
+    /* ===== PAGE HEADER with SOLID BACKGROUND COLOR ===== */
+    .page-header {
+      background: linear-gradient(135deg, #6d2e2e 0%, #4d1f1f 100%);
+      color: white;
+      padding: 4rem 0 3.5rem;
+      text-align: center;
+      border-bottom-left-radius: 3rem;
+      border-bottom-right-radius: 3rem;
+      margin: 1.5rem 0 2rem 0;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
+      position: relative;
+      z-index: 5;
+      border-bottom: 1px solid rgba(255, 200, 150, 0.3);
+    }
+
+    .page-header h1 {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .page-header p {
+      font-size: 1.3rem;
+      max-width: 700px;
+      margin: 0 auto;
+      opacity: 0.95;
+    }
+
+    /* Contact section with glassmorphism effect */
+    .contact-section {
+      padding: 2rem 0 3rem;
+      position: relative;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+
+    .contact-info, .contact-form {
+      background: rgba(255, 252, 245, 0.94);
+      backdrop-filter: blur(4px);
+      border-radius: 2.5rem;
+      padding: 2.8rem;
+      box-shadow: 0 20px 35px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s, box-shadow 0.3s;
+      border: 1px solid rgba(255, 215, 180, 0.5);
+    }
+
+    .contact-info:hover, .contact-form:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 28px 40px rgba(0, 0, 0, 0.25);
+    }
+
+    .contact-info h2, .contact-form h2 {
+      color: var(--primary);
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+
+    .contact-info h2::after, .contact-form h2::after {
+      content: '';
+      position: absolute;
+      bottom: -12px;
+      left: 0;
+      width: 70px;
+      height: 4px;
+      background: var(--secondary);
+      border-radius: 4px;
+    }
+
+    .info-card {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 1.8rem;
+      padding: 1.2rem;
+      background: #fffaf5;
+      border-radius: 1.8rem;
+      transition: all 0.25s;
+      border: 1px solid #f3e5dc;
+    }
+
+    .info-card:hover {
+      transform: translateX(6px);
+      background: white;
+      border-color: var(--primary-light);
+    }
+
+    .info-icon {
+      width: 60px;
+      height: 60px;
+      background: var(--primary);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      flex-shrink: 0;
+      box-shadow: 0 6px 12px rgba(128, 0, 0, 0.2);
+    }
+
+    .info-content h3 {
+      color: var(--primary);
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .info-content p, .info-content a {
+      color: #3d2c24;
+      text-decoration: none;
+    }
+
+    .info-content a:hover {
+      color: var(--primary);
+    }
+
+    .registration-details {
+      margin-top: 2rem;
+      padding: 1.6rem;
+      background: rgba(128, 0, 0, 0.05);
+      border-radius: 1.8rem;
+      border: 1px solid rgba(128, 0, 0, 0.15);
+    }
+
+    .registration-item {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      padding: 0.4rem;
+      align-items: center;
+    }
+
+    .registration-item i {
+      color: var(--primary);
+      width: 28px;
+    }
+
+    /* Form styling */
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.6rem;
+      font-weight: 700;
+      color: #3e2a24;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 0.9rem 1.2rem;
+      border: 2px solid #e9dbd2;
+      border-radius: 60px;
+      font-family: inherit;
+      font-size: 1rem;
+      transition: all 0.3s;
+      background: #fffefc;
+    }
+
+    .form-group textarea {
+      border-radius: 30px;
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(128, 0, 0, 0.15);
+    }
+
+    .submit-btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 60px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      width: 100%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      transition: all 0.3s;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .submit-btn:hover {
+      background: #9e3a3a;
+      transform: translateY(-3px);
+      box-shadow: 0 12px 22px rgba(128, 0, 0, 0.4);
+    }
+
+    /* ===== INTERACTIVE MAP SECTION - EMBEDDED GOOGLE MAP ===== */
+    .map-section {
+      padding: 2rem 0 5rem;
+    }
+
+    .map-container {
+      background: rgba(255, 250, 240, 0.94);
+      backdrop-filter: blur(4px);
+      border-radius: 2.5rem;
+      padding: 2rem;
+      box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 215, 180, 0.6);
+      transition: transform 0.3s;
+    }
+
+    .map-container:hover {
+      transform: translateY(-5px);
+    }
+
+    .map-container h2 {
+      color: var(--primary);
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .map-wrapper {
+      border-radius: 1.8rem;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      border: 2px solid rgba(128, 0, 0, 0.3);
+    }
+
+    .map-wrapper iframe {
+      width: 100%;
+      height: 450px;
+      display: block;
+      border: 0;
+    }
+
+    .map-address {
+      text-align: center;
+      margin-top: 1.5rem;
+      padding: 1rem;
+      background: rgba(128, 0, 0, 0.08);
+      border-radius: 2rem;
+      font-size: 1.1rem;
+      color: #3d2a20;
+    }
+
+    .map-address i {
+      color: var(--primary);
+      margin-right: 8px;
+    }
+
+    /* Footer */
+    .footer {
+     background: var(--dark);
+      backdrop-filter: blur(5px);
+      color: #f0e2d4;
+      padding: 3.5rem 0 2rem;
+      margin-top: 1rem;
+      border-top: 1px solid rgba(255, 200, 150, 0.3);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .footer h4 {
+      color: white;
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+
+    .footer a {
+      color: #e0b0b0;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .footer a:hover {
+      color: white;
+      transform: translateX(5px);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 1.8rem;
+      border-top: 1px solid #5f4b4b;
+    }
+
+    .back-to-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: var(--primary);
+      color: white;
+      padding: 0.8rem 1.3rem;
+      border-radius: 60px;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s;
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.4);
+      z-index: 99;
+      font-weight: bold;
+    }
+
+    .back-to-top:hover {
+      background: #9e3a3a;
+      transform: translateY(-5px);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 900px) {
+      .menu-icon {
+        display: block;
+      }
+
+      .nav-links {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        background: rgba(46, 26, 26, 0.97);
+        backdrop-filter: blur(8px);
+        padding: 1.5rem;
+        border-radius: 2rem;
+        margin-top: 1rem;
+        gap: 0.7rem;
+      }
+
+      .nav-links.show {
+        display: flex;
+      }
+
+      .dropdown {
+        width: 100%;
+      }
+
+      .dropdown-link-wrapper {
+        width: 100%;
+        background: rgba(255, 245, 230, 0.15);
+        border-radius: 60px;
+      }
+
+      .dropdown-content {
+        position: relative;
+        top: 0;
+        width: 100%;
+        background: #2b1a16;
+        margin-top: 0.5rem;
+      }
+
+      .dropdown-content a {
+        color: #ffded0;
+      }
+
+      .nav-link {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .btn {
+        width: 100%;
+        justify-content: center;
+        margin-top: 0.5rem;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .contact-info h2::after,
+      .contact-form h2::after {
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+      }
+
+      .contact-info h2,
+      .contact-form h2 {
+        text-align: center;
+      }
+
+      .info-card {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+      }
+
+      .info-icon {
+        margin: 0 auto;
+      }
+
+      .page-header {
+        padding: 2.8rem 1rem;
+        margin: 1rem 0 1.5rem;
+        border-radius: 2rem;
+      }
+
+      .map-wrapper iframe {
+        height: 320px;
+      }
+    }
+
+    @media (max-width: 550px) {
+      .container {
+        padding: 0 1rem;
+      }
+
+      .contact-info, .contact-form {
+        padding: 1.6rem;
+      }
+
+      .map-wrapper iframe {
+        height: 280px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="container nav-container">
+      <div class="logo">
+        <img src="images/logo.png" alt="Logo" class="logo-img" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'50\' height=\'50\' viewBox=\'0 0 50 50\'%3E%3Crect width=\'50\' height=\'50\' fill=\'%23800000\' rx=\'10\'/%3E%3Ctext x=\'8\' y=\'38\' fill=\'white\' font-size=\'35\'%3E🤝%3C/text%3E%3C/svg%3E'">
+        <span>Helping Hands Uganda</span>
+      </div>
+      <div class="menu-icon" id="menuToggle">
+        <i class="fas fa-bars"></i>
+      </div>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a>
+        <div class="dropdown" id="aboutDropdown">
+          <div class="dropdown-link-wrapper">
+            <a href="about.html" class="dropdown-text"><i class="fas fa-info-circle"></i> About Us</a>
+            <button class="dropdown-icon" aria-label="Toggle dropdown"><i class="fas fa-chevron-down"></i></button>
+          </div>
+          <div class="dropdown-content">
+            <a href="who-we-are.html">Who we are</a>
+            <a href="history.html">Our history</a>
+            <a href="mission-vision.html">Mission & Vision</a>
+            <a href="beneficiaries.html">Beneficiaries</a>
+            <a href="core-values.html">Core values</a>
+          </div>
+        </div>
+        <div class="dropdown" id="projectsDropdown">
+          <div class="dropdown-link-wrapper">
+            <a href="projects.html" class="dropdown-text"><i class="fas fa-leaf"></i> Projects</a>
+            <button class="dropdown-icon" aria-label="Toggle dropdown"><i class="fas fa-chevron-down"></i></button>
+          </div>
+          <div class="dropdown-content">
+            <a href="orphan-care.html">Orphan care & shelter</a>
+            <a href="education-support.html">Education support</a>
+            <a href="women-empowerment.html">Women empowerment</a>
+            <a href="sacco-loans.html">SACCO & loans</a>
+            <a href="water-sanitation.html">Water & sanitation</a>
+            <a href="humanitarian-aid.html">Humanitarian aid</a>
+          </div>
+        </div>
+        <a href="gallery.html" class="nav-link"><i class="fas fa-images"></i> Gallery</a>
+        <a href="contact.html" class="nav-link active-home"><i class="fas fa-envelope"></i> Contact Us</a>
+        <a href="donate.html" class="btn"><i class="fas fa-donate"></i> Donate now</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- PAGE HEADER with beautiful solid background color -->
+  <section class="page-header">
+    <div class="container">
+      <h1>Get in Touch</h1>
+      <p>We're here to listen, partner, and support. Reach out today — your voice matters.</p>
+    </div>
+  </section>
+
+  <!-- Contact Section with glass cards -->
+  <section class="contact-section">
+    <div class="container">
+      <div class="contact-grid">
+        <!-- Left Column - Contact Information -->
+        <div class="contact-info">
+          <h2>Contact Information</h2>
+          <div class="info-card">
+            <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+            <div class="info-content">
+              <h3>Registered Office</h3>
+              <p>Humya 1, LC I<br>Buhundu Parish<br>Bukonzo Subcounty<br>Bundibugyo District<br>Uganda</p>
+            </div>
+          </div>
+          <div class="info-card">
+            <div class="info-icon"><i class="fas fa-phone-alt"></i></div>
+            <div class="info-content">
+              <h3>Phone</h3>
+              <p><a href="tel:+256764377294">+256 764377294</a><br><a href="tel:+256783572503">+256 783 572503</a></p>
+            </div>
+          </div>
+          <div class="info-card">
+            <div class="info-icon"><i class="fas fa-envelope"></i></div>
+            <div class="info-content">
+              <h3>Email</h3>
+              <p><a href="mailto:info@helpinghandsug.org">info@helpinghandsug.org</a><br><a href="mailto:registrar@helpinghandsug.org">registrar@helpinghandsug.org</a></p>
+            </div>
+          </div>
+          <div class="info-card">
+            <div class="info-icon"><i class="fas fa-clock"></i></div>
+            <div class="info-content">
+              <h3>Office Hours</h3>
+              <p>Monday - Friday: 8:00 AM - 5:00 PM<br>Saturday: 9:00 AM - 1:00 PM<br>Sunday: Closed</p>
+            </div>
+          </div>
+          <div class="registration-details">
+            <h3>Registration Information</h3>
+            <div class="registration-item"><i class="fas fa-certificate"></i><div><strong>Legal Status:</strong> Community Based Organization (CBO)</div></div>
+            <div class="registration-item"><i class="fas fa-calendar-alt"></i><div><strong>Founded:</strong> 17 December 2023</div></div>
+            <div class="registration-item"><i class="fas fa-users"></i><div><strong>Founding Members:</strong> 15</div></div>
+            <div class="registration-item"><i class="fas fa-globe-africa"></i><div><strong>District:</strong> Bundibugyo, Uganda</div></div>
+          </div>
+        </div>
+
+        <!-- Right Column - Contact Form -->
+        <div class="contact-form">
+          <h2>Send Us a Message</h2>
+          <form id="contactForm">
+            <div class="form-group">
+              <label for="name">Full Name *</label>
+              <input type="text" id="name" name="name" required placeholder="Your full name">
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address *</label>
+              <input type="email" id="email" name="email" required placeholder="you@example.com">
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" name="phone" placeholder="+256 XXX XXX XXX">
+            </div>
+            <div class="form-group">
+              <label for="subject">Subject *</label>
+              <select id="subject" name="subject" required>
+                <option value="" disabled selected>Select a subject</option>
+                <option value="partnership">Partnership Inquiry</option>
+                <option value="donation">Donation / Support</option>
+                <option value="volunteer">Volunteer Opportunities</option>
+                <option value="program">Program Information</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="message">Message *</label>
+              <textarea id="message" name="message" required placeholder="Write your message here..."></textarea>
+            </div>
+            <button type="submit" class="submit-btn"><i class="fas fa-paper-plane"></i> Send Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAP SECTION - Embedded Interactive Google Map -->
+  <section class="map-section">
+    <div class="container">
+      <div class="map-container">
+        <h2><i class="fas fa-map-marked-alt"></i> Find Our Location</h2>
+        <div class="map-wrapper">
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15955.704457259975!2d30.058456!3d0.716186!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x176e2d8b2b7b8b8b%3A0x8b8b8b8b8b8b8b8b!2sBundibugyo%2C%20Uganda!5e0!3m2!1sen!2sug!4v1700000000000!5m2!1sen!2sug" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Helping Hands Uganda Location Map">
+          </iframe>
+        </div>
+        <div class="map-address">
+          <i class="fas fa-location-dot"></i> <strong>Humya 1, LC I, Buhundu Parish, Bukonzo Subcounty, Bundibugyo District, Uganda</strong>
+          <p style="margin-top: 8px; font-size: 0.9rem;"><i class="fas fa-directions"></i> Use the map to get directions — we're located in the heart of Bundibugyo community.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div><h4><i class="fas fa-hand-holding-heart"></i> Helping Hands Uganda</h4><p>Humya 1, LC I<br>Buhundu Parish<br>Bukonzo Subcounty<br>Bundibugyo District, Uganda</p></div>
+        <div><h4>Quick Links</h4><a href="about.html">About Us</a><a href="projects.html">Our Projects</a><a href="gallery.html">Gallery</a><a href="contact.html">Contact</a></div>
+        <div><h4>Contact Info</h4><a href="tel:+256764377294"><i class="fas fa-phone"></i> +256 764377294</a><a href="mailto:info@helpinghandsug.org"><i class="fas fa-envelope"></i> info@helpinghandsug.org</a></div>
+        <div><h4>Connect With Us</h4><div style="font-size: 1.8rem; letter-spacing: 0.5rem;"><i class="fab fa-facebook"></i><i class="fab fa-x-twitter"></i><i class="fab fa-instagram"></i><i class="fab fa-whatsapp"></i></div></div>
+      </div>
+      <div class="footer-bottom"><p>© 2025 Helping Hands Uganda. All rights reserved.</p><p>Registered Community Based Organization - Bundibugyo District, Uganda</p></div>
+    </div>
+  </footer>
+  <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i> Back to top</a>
+
+  <script>
+    (function() {
+      const menuToggle = document.getElementById('menuToggle');
+      const navLinks = document.getElementById('navLinks');
+      const dropdowns = document.querySelectorAll('.dropdown');
+
+      if (menuToggle) {
+        menuToggle.addEventListener('click', function(e) {
+          e.stopPropagation();
+          navLinks.classList.toggle('show');
+        });
+      }
+
+      dropdowns.forEach(function(dropdown) {
+        const iconBtn = dropdown.querySelector('.dropdown-icon');
+        if (iconBtn) {
+          iconBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            dropdowns.forEach(d => { if (d !== dropdown) d.classList.remove('active'); });
+            dropdown.classList.toggle('active');
+          });
+        }
+      });
+
+      document.addEventListener('click', function(e) {
+        let inside = false;
+        dropdowns.forEach(d => { if (d.contains(e.target)) inside = true; });
+        if (!inside && menuToggle && !menuToggle.contains(e.target)) {
+          dropdowns.forEach(d => d.classList.remove('active'));
+          if (navLinks) navLinks.classList.remove('show');
+        }
+      });
+
+      document.querySelectorAll('.dropdown-content').forEach(c => {
+        c.addEventListener('click', e => e.stopPropagation());
+      });
+
+      const contactForm = document.getElementById('contactForm');
+      if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          alert('✨ Thank you for reaching out! Our team will respond within 24 hours.');
+          this.reset();
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

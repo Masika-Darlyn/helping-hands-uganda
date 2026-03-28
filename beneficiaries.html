@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <link rel="icon" type="image/png" href="images/logo.png">
+  <title>Helping Hands Uganda | Our Beneficiaries</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+       --primary: #800000;
+      --primary-light: #a04545;
+      --secondary: #6b2d2d;
+      --accent: #a52a2a;
+      --dark: #330000;
+      --soft-bg: #fef8f2;
+      --shadow: 0 8px 20px rgba(100, 30, 0, 0.12);
+      --nav-bg: rgb(238, 219, 219);
+      --dropdown-bg: #ffffff;
+    }
+
+    body {
+      background: url('https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover fixed no-repeat;
+      font-family: 'Times New Roman', Times, serif;
+      line-height: 1.6;
+      color: #1f1a17;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(2px);
+      z-index: -2;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* NAVBAR */
+    .navbar {
+       background: var(--nav-bg);
+      box-shadow: var(--shadow);
+      padding: 0.5rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      width: 100%;
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+     .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: clamp(1.2rem, 4vw, 1.8rem);
+      color: var(--primary);
+    }
+
+    .logo-img {
+      height: 50px;
+      width: auto;
+      border-radius: 8px;
+      background: white;
+      padding: 3px;
+    }
+
+       .menu-icon {
+      display: none;
+      font-size: 2.4rem;
+      color: var(--primary);
+      cursor: pointer;
+      padding: 0.5rem 1rem;
+      transition: transform 0.2s;
+    }
+.menu-icon:hover {
+      transform: scale(1.05);
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .nav-link {
+      font-size: 1rem;
+      padding: 0.7rem 1.3rem;
+      border-radius: 40px;
+      color: var(--dark);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.3s;
+      font-weight: 500;
+    }
+
+    .nav-link:hover {
+      background: rgba(128,0,0,0.08);
+       transform: translateY(-2px);
+    }
+
+    .nav-link.active-home {
+      background: var(--primary);
+      color: white !important;
+    }
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-link-wrapper {
+      display: flex;
+      align-items: center;
+      background: transparent;
+      border-radius: 40px;
+      overflow: hidden;
+    }
+
+    .dropdown-text {
+      font-size: 1rem;
+      padding: 0.7rem 0.5rem 0.7rem 1.3rem;
+      color: var(--dark);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 500;
+    }
+
+    .dropdown-text:hover {
+      background: rgba(128,0,0,0.08);
+    }
+
+    .dropdown-icon {
+      font-size: 1rem;
+      padding: 0.7rem 1.3rem 0.7rem 0.5rem;
+      color: var(--dark);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .dropdown-icon i {
+      font-size: 0.7rem;
+      transition: transform 0.2s;
+    }
+
+    .dropdown-icon:hover {
+      background: rgba(128,0,0,0.08);
+    }
+
+    .dropdown.active .dropdown-icon i {
+      transform: rotate(180deg);
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      min-width: 240px;
+      background: var(--dropdown-bg);
+      border-radius: 20px;
+      box-shadow: 0 20px 35px rgba(0,0,0,0.2);
+      padding: 0.8rem 0;
+      z-index: 1000;
+      margin-top: 5px;
+      border: 1px solid #f0e0e0;
+    }
+
+    .dropdown.active .dropdown-content {
+      display: block;
+    }
+
+    .dropdown-content a {
+      color: var(--dark);
+      padding: 0.8rem 1.8rem;
+      text-decoration: none;
+      display: block;
+      transition: all 0.2s;
+    }
+
+    .dropdown-content a:hover {
+      background: #f0e6e0;
+      color: var(--primary);
+      padding-left: 2rem;
+    }
+
+    .btn {
+      padding: 0.7rem 1.6rem;
+      border-radius: 60px;
+      background: linear-gradient(135deg, #ffb347, #ff8c1a);
+      color: #2d1b0c;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-left: 0.3rem;
+      font-weight: bold;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s;
+    }
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+      background: linear-gradient(135deg, #ffc26b, #ffa133);
+    }
+
+    /* Page Header */
+    .page-header {
+      background: linear-gradient(135deg, #6d2e2e 0%, #4d1f1f 100%);
+      color: white;
+      padding: 4rem 0 3.5rem;
+      text-align: center;
+      border-bottom-left-radius: 3rem;
+      border-bottom-right-radius: 3rem;
+      margin: 1.5rem 0 2rem 0;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
+    }
+
+    .page-header h1 {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .page-header p {
+      font-size: 1.3rem;
+      max-width: 700px;
+      margin: 0 auto;
+      opacity: 0.95;
+    }
+
+    /* Main Content */
+    .beneficiaries-section {
+      padding: 2rem 0 5rem;
+    }
+
+    .content-card {
+      background: rgba(255, 252, 245, 0.95);
+      backdrop-filter: blur(4px);
+      border-radius: 2rem;
+      padding: 2.5rem;
+      margin-bottom: 2.5rem;
+      box-shadow: 0 20px 35px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s;
+    }
+
+    .content-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .section-title {
+      color: var(--primary);
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 60px;
+      height: 4px;
+      background: var(--secondary);
+      border-radius: 2px;
+    }
+
+    /* Beneficiary Categories Grid */
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+
+    .category-card {
+      background: white;
+      border-radius: 1.5rem;
+      padding: 2rem;
+      text-align: center;
+      transition: all 0.3s;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .category-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: var(--primary);
+    }
+
+    .category-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 35px rgba(0, 0, 0, 0.15);
+    }
+
+    .category-icon {
+      font-size: 3rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .category-card h3 {
+      color: var(--primary);
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+    }
+
+    .category-card p {
+      color: #5a3a2a;
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+
+    .category-stats {
+      display: inline-block;
+      background: rgba(128, 0, 0, 0.1);
+      padding: 0.3rem 1rem;
+      border-radius: 60px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-top: 0.5rem;
+    }
+
+    /* Stories Grid */
+    .stories-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+
+    .story-card {
+      background: white;
+      border-radius: 1.5rem;
+      overflow: hidden;
+      transition: all 0.3s;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .story-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 35px rgba(0, 0, 0, 0.15);
+    }
+
+    .story-image {
+      height: 220px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .story-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s;
+    }
+
+    .story-card:hover .story-image img {
+      transform: scale(1.05);
+    }
+
+    .story-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(128, 0, 0, 0.7));
+      padding: 1rem;
+    }
+
+    .story-category {
+      background: var(--primary);
+      color: white;
+      padding: 0.3rem 0.8rem;
+      border-radius: 60px;
+      font-size: 0.75rem;
+      display: inline-block;
+    }
+
+    .story-content {
+      padding: 1.5rem;
+    }
+
+    .story-content h3 {
+      color: var(--primary);
+      font-size: 1.2rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .story-content p {
+      color: #5a3a2a;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .story-quote {
+      font-style: italic;
+      color: var(--primary);
+      border-left: 3px solid var(--primary);
+      padding-left: 1rem;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+    }
+
+    /* Stats Row */
+    .stats-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      gap: 2rem;
+      margin: 2rem 0;
+      text-align: center;
+    }
+
+    .stat-box {
+      flex: 1;
+      min-width: 150px;
+      background: rgba(128, 0, 0, 0.1);
+      padding: 1.5rem;
+      border-radius: 1.5rem;
+      transition: transform 0.3s;
+    }
+
+    .stat-box:hover {
+      transform: translateY(-5px);
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      color: #5a3a2a;
+    }
+
+    /* Testimonial Section */
+    .testimonial-card {
+      background: linear-gradient(135deg, rgba(128, 0, 0, 0.05), rgba(100, 50, 30, 0.05));
+      border-radius: 1.5rem;
+      padding: 2rem;
+      margin: 1rem 0;
+      position: relative;
+    }
+
+    .testimonial-text {
+      font-size: 1.1rem;
+      font-style: italic;
+      color: #3d2c24;
+      line-height: 1.7;
+    }
+
+    .testimonial-author {
+      margin-top: 1rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .testimonial-role {
+      font-size: 0.85rem;
+      color: #7a5a4a;
+    }
+
+    /* Impact Numbers */
+    .impact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .impact-item {
+      text-align: center;
+      padding: 1.5rem;
+      background: white;
+      border-radius: 1.5rem;
+      transition: all 0.3s;
+    }
+
+    .impact-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .impact-number {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .impact-label {
+      font-size: 0.9rem;
+      color: #5a3a2a;
+      margin-top: 0.5rem;
+    }
+
+   /* Footer */
+    .footer {
+      background: var(--dark);
+      backdrop-filter: blur(5px);
+      color: #f0e2d4;
+      padding: 3.5rem 0 2rem;
+      margin-top: 1rem;
+      border-top: 1px solid rgba(255, 200, 150, 0.3);
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2.5rem;
+    }
+    .footer h4 {
+      color: white;
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+    .footer a {
+      color: #e0b0b0;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    .footer a:hover {
+      color: white;
+      transform: translateX(5px);
+    }
+    .footer-bottom {
+      text-align: center;
+      padding-top: 1.8rem;
+      border-top: 1px solid #5f4b4b;
+    }
+    .back-to-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: var(--primary);
+      color: white;
+      padding: 0.8rem 1.3rem;
+      border-radius: 60px;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+     transition: all 0.3s;
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.4);
+      z-index: 99;
+      font-weight: bold;
+    }
+    .back-to-top:hover {
+      background: #9e3a3a;
+      transform: translateY(-5px);
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .menu-icon {
+        display: block;
+      }
+      .nav-links {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        background: rgba(46, 26, 26, 0.97);
+        backdrop-filter: blur(8px);
+        padding: 1.5rem;
+        border-radius: 2rem;
+        margin-top: 1rem;
+      }
+      .nav-links.show {
+        display: flex;
+      }
+      .dropdown {
+        width: 100%;
+      }
+      .dropdown-link-wrapper {
+        width: 100%;
+      }
+      .dropdown-content {
+        position: relative;
+        width: 100%;
+        background: #2b1a16;
+      }
+      .dropdown-content a {
+        color: #ffded0;
+      }
+      .nav-link {
+        width: 100%;
+        justify-content: center;
+      }
+      .btn {
+        width: 100%;
+        justify-content: center;
+      }
+      
+      .section-title::after {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      .section-title {
+        display: block;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 550px) {
+      .container {
+        padding: 0 1rem;
+      }
+      .content-card {
+        padding: 1.5rem;
+      }
+      .stats-row {
+        flex-direction: column;
+      }
+      .stories-grid {
+        grid-template-columns: 1fr;
+      }
+      .categories-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="container nav-container">
+      <div class="logo">
+        <img src="images/logo.png" alt="Logo" class="logo-img" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'50\' height=\'50\' viewBox=\'0 0 50 50\'%3E%3Crect width=\'50\' height=\'50\' fill=\'%23800000\' rx=\'10\'/%3E%3Ctext x=\'8\' y=\'38\' fill=\'white\' font-size=\'35\'%3E🤝%3C/text%3E%3C/svg%3E'">
+        <span>Helping Hands Uganda</span>
+      </div>
+      <div class="menu-icon" id="menuToggle">
+        <i class="fas fa-bars"></i>
+      </div>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a>
+        <div class="dropdown" id="aboutDropdown">
+          <div class="dropdown-link-wrapper">
+            <a href="about.html" class="dropdown-text"><i class="fas fa-info-circle"></i> About Us</a>
+            <button class="dropdown-icon" aria-label="Toggle dropdown"><i class="fas fa-chevron-down"></i></button>
+          </div>
+          <div class="dropdown-content">
+            <a href="who-we-are.html">Who we are</a>
+            <a href="history.html">Our history</a>
+            <a href="mission-vision.html">Mission & Vision</a>
+            <a href="beneficiaries.html">Beneficiaries</a>
+            <a href="core-values.html">Core values</a>
+          </div>
+        </div>
+        <div class="dropdown" id="projectsDropdown">
+          <div class="dropdown-link-wrapper">
+            <a href="projects.html" class="dropdown-text"><i class="fas fa-leaf"></i> Projects</a>
+            <button class="dropdown-icon" aria-label="Toggle dropdown"><i class="fas fa-chevron-down"></i></button>
+          </div>
+          <div class="dropdown-content">
+            <a href="orphan-care.html">Orphan care & shelter</a>
+            <a href="education-support.html">Education support</a>
+            <a href="women-empowerment.html">Women empowerment</a>
+            <a href="sacco-loans.html">SACCO & loans</a>
+            <a href="water-sanitation.html">Water & sanitation</a>
+            <a href="humanitarian-aid.html">Humanitarian aid</a>
+          </div>
+        </div>
+        <a href="gallery.html" class="nav-link"><i class="fas fa-images"></i> Gallery</a>
+        <a href="contact.html" class="nav-link"><i class="fas fa-envelope"></i> Contact Us</a>
+        <a href="donate.html" class="btn"><i class="fas fa-donate"></i> Donate now</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <section class="page-header">
+    <div class="container">
+      <h1>Our Beneficiaries</h1>
+      <p>The heart of our work — the children, women, and families we serve across Uganda</p>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <section class="beneficiaries-section">
+    <div class="container">
+      
+      <!-- Introduction -->
+      <div class="content-card">
+        <h2 class="section-title">Who We Serve</h2>
+        <p style="font-size: 1.1rem; margin-bottom: 1rem;">Helping Hands Uganda is dedicated to serving the most vulnerable members of our communities — those who face daily challenges that most people rarely see.</p>
+        <p>From orphaned children who have lost parental care to single mothers struggling to provide for their families, from school dropouts with no hope for the future to low-income farmers facing economic hardship — we are here to restore dignity, opportunity, and hope. Each beneficiary we serve represents a life we are committed to transforming.</p>
+        
+        <div class="stats-row">
+          <div class="stat-box">
+            <div class="stat-number">10+</div>
+            <div class="stat-label">Orphaned Children in Direct Care</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-number">20+</div>
+            <div class="stat-label">SACCO Members Supported</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-number">5+</div>
+            <div class="stat-label">Girls Trained Quarterly</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-number">15</div>
+            <div class="stat-label">Founding Families</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Beneficiary Categories -->
+      <div class="content-card">
+        <h2 class="section-title">Our Beneficiary Groups</h2>
+        <div class="categories-grid">
+          <div class="category-card">
+            <div class="category-icon"><i class="fas fa-child"></i></div>
+            <h3>Orphaned & Vulnerable Children</h3>
+            <p>Children who have lost one or both parents, living in unstable conditions, facing emotional trauma, and lacking access to education, shelter, and basic necessities.</p>
+            <div class="category-stats">10+ children in direct care</div>
+          </div>
+          <div class="category-card">
+            <div class="category-icon"><i class="fas fa-female"></i></div>
+            <h3>Single Mothers & Women</h3>
+            <p>Women facing economic hardship, single mothers struggling to provide for their children, and girls at risk of early marriage or exploitation.</p>
+            <div class="category-stats">Empowerment programs ongoing</div>
+          </div>
+          <div class="category-card">
+            <div class="category-icon"><i class="fas fa-graduation-cap"></i></div>
+            <h3>School Dropouts</h3>
+            <p>Children and youth who have left school due to poverty, family circumstances, or lack of resources, now seeking second chances through education.</p>
+            <div class="category-stats">Enrollment support available</div>
+          </div>
+          <div class="category-card">
+            <div class="category-icon"><i class="fas fa-tractor"></i></div>
+            <h3>Low-Income Farmers</h3>
+            <p>Rural farmers struggling with limited resources, seeking support to improve their agricultural productivity and economic stability.</p>
+            <div class="category-stats">SACCO loans available</div>
+          </div>
+          <div class="category-card">
+            <div class="category-icon"><i class="fas fa-store"></i></div>
+            <h3>Small Business Owners</h3>
+            <p>Local entrepreneurs needing small loans and business support to grow their enterprises and support their families.</p>
+            <div class="category-stats">20+ SACCO members</div>
+          </div>
+          <div class="category-card">
+            <div class="category-icon"><i class="fas fa-water"></i></div>
+            <h3>Rural Communities</h3>
+            <p>Villages lacking access to clean water, sanitation, and basic services, working together for sustainable development.</p>
+            <div class="category-stats">Water projects ongoing</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Impact Numbers -->
+      <div class="content-card">
+        <h2 class="section-title">Our Impact</h2>
+        <div class="impact-grid">
+          <div class="impact-item">
+            <div class="impact-number">2022</div>
+            <div class="impact-label">Year We Began</div>
+          </div>
+          <div class="impact-item">
+            <div class="impact-number">10+</div>
+            <div class="impact-label">Children in Safe Shelter</div>
+          </div>
+          <div class="impact-item">
+            <div class="impact-number">5+</div>
+            <div class="impact-label">Girls Trained in Tailoring</div>
+          </div>
+          <div class="impact-item">
+            <div class="impact-number">20+</div>
+            <div class="impact-label">Families Supported</div>
+          </div>
+          <div class="impact-item">
+            <div class="impact-number">15</div>
+            <div class="impact-label">Founding Members</div>
+          </div>
+          <div class="impact-item">
+            <div class="impact-number">Under Construction</div>
+            <div class="impact-label">New Orphan Home</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Success Stories -->
+      <div class="content-card">
+        <h2 class="section-title">Stories of Hope</h2>
+        <p style="margin-bottom: 1.5rem;">Every life transformed is a testament to the power of compassion and community. Here are some of the lives we've touched:</p>
+        <div class="stories-grid">
+          <div class="story-card">
+            <div class="story-image">
+              <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=400&h=250&fit=crop" alt="Orphaned children" onerror="this.src='https://via.placeholder.com/400x250?text=Orphan+Care'">
+              <div class="story-overlay">
+                <span class="story-category"><i class="fas fa-child"></i> Orphan Care</span>
+              </div>
+            </div>
+            <div class="story-content">
+              <h3>Finding a New Home</h3>
+              <p>Ten orphaned children who once faced uncertain futures now live under the loving care of Helping Hands Uganda. Each child receives shelter, nutritious meals, emotional support, and the opportunity to attend school.</p>
+              <div class="story-quote">
+                "Here, I feel safe. I can sleep without fear and dream about becoming a teacher one day." — One of our children
+              </div>
+            </div>
+          </div>
+          
+          <div class="story-card">
+            <div class="story-image">
+              <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=400&h=250&fit=crop" alt="Tailoring training" onerror="this.src='https://via.placeholder.com/400x250?text=Women+Empowerment'">
+              <div class="story-overlay">
+                <span class="story-category"><i class="fas fa-female"></i> Women Empowerment</span>
+              </div>
+            </div>
+            <div class="story-content">
+              <h3>From Struggle to Skill</h3>
+              <p>Through our tailoring program, young women who had dropped out of school are learning valuable skills that enable them to earn a living and regain confidence. With five sewing machines and dedicated trainers, we train groups of five girls every three months.</p>
+              <div class="story-quote">
+                "I never thought I could learn a skill. Now I can make clothes for my family and even earn money." — Program graduate
+              </div>
+            </div>
+          </div>
+          
+          <div class="story-card">
+            <div class="story-image">
+              <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?w=400&h=250&fit=crop" alt="Education support" onerror="this.src='https://via.placeholder.com/400x250?text=Education'">
+              <div class="story-overlay">
+                <span class="story-category"><i class="fas fa-graduation-cap"></i> Education</span>
+              </div>
+            </div>
+            <div class="story-content">
+              <h3>A Second Chance at School</h3>
+              <p>Through donor support, Masika Ritah was enrolled in school — a milestone that gave her a chance to begin her educational journey. Many more children are waiting for the same opportunity to attend school and pursue their dreams.</p>
+              <div class="story-quote">
+                "Now I can read and write. I want to become a nurse and help others." — Masika Ritah
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Testimonials -->
+      <div class="content-card">
+        <h2 class="section-title">What Our Beneficiaries Say</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+          <div class="testimonial-card">
+            <i class="fas fa-quote-left" style="color: var(--primary); font-size: 1.5rem; opacity: 0.5;"></i>
+            <p class="testimonial-text">"Before Helping Hands Uganda, my children and I struggled to get a single meal. Today, my children are in school, and I am learning tailoring. I have hope again."</p>
+            <div class="testimonial-author">Grace M.</div>
+            <div class="testimonial-role">Single Mother & Program Participant</div>
+          </div>
+          <div class="testimonial-card">
+            <i class="fas fa-quote-left" style="color: var(--primary); font-size: 1.5rem; opacity: 0.5;"></i>
+            <p class="testimonial-text">"The SACCO loan I received helped me buy seeds and tools for my farm. Now I can harvest enough to feed my family and sell the rest. This program changed my life."</p>
+            <div class="testimonial-author">James K.</div>
+            <div class="testimonial-role">Farmer & SACCO Member</div>
+          </div>
+          <div class="testimonial-card">
+            <i class="fas fa-quote-left" style="color: var(--primary); font-size: 1.5rem; opacity: 0.5;"></i>
+            <p class="testimonial-text">"The orphan home is our safe place. The caregivers treat us like family. I am grateful to everyone who supports Helping Hands Uganda."</p>
+            <div class="testimonial-author">Child Beneficiary</div>
+            <div class="testimonial-role">Resident at Orphan Care Home</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Call to Action -->
+      <div class="content-card" style="text-align: center; background: linear-gradient(135deg, rgba(128,0,0,0.95), rgba(100,50,30,0.95)); color: white;">
+        <h2 style="color: white; margin-bottom: 1rem;">You Can Make a Difference</h2>
+        <p style="margin-bottom: 1.5rem;">Every child who finds a safe home, every woman who learns a skill, every family that gains hope — these transformations are possible because of supporters like you.</p>
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+          <a href="donate.html" style="background: #ffb347; color: #2d1b0c; padding: 0.8rem 2rem; border-radius: 60px; text-decoration: none; font-weight: bold;"><i class="fas fa-donate"></i> Sponsor a Child</a>
+          <a href="contact.html" style="background: transparent; border: 2px solid white; color: white; padding: 0.8rem 2rem; border-radius: 60px; text-decoration: none; font-weight: bold;"><i class="fas fa-handshake"></i> Partner With Us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+   <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div><h4><i class="fas fa-hand-holding-heart"></i> Helping Hands Uganda</h4><p>Humya 1, LC I<br>Buhundu Parish<br>Bukonzo Subcounty<br>Bundibugyo District, Uganda</p></div>
+        <div><h4>Quick Links</h4><a href="about.html">About Us</a><a href="projects.html">Our Projects</a><a href="gallery.html">Gallery</a><a href="contact.html">Contact</a></div>
+        <div><h4>Contact Info</h4><a href="tel:+256764377294"><i class="fas fa-phone"></i> +256 764377294</a><a href="mailto:info@helpinghandsug.org"><i class="fas fa-envelope"></i> info@helpinghandsug.org</a></div>
+        <div><h4>Connect With Us</h4><div style="font-size: 1.8rem; letter-spacing: 0.5rem;"><i class="fab fa-facebook"></i><i class="fab fa-x-twitter"></i><i class="fab fa-instagram"></i><i class="fab fa-whatsapp"></i></div></div>
+      </div>
+      <div class="footer-bottom"><p>© 2025 Helping Hands Uganda. All rights reserved.</p><p>Registered Community Based Organization - Bundibugyo District, Uganda</p></div>
+    </div>
+  </footer>
+  <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i> Back to top</a>
+
+  <script>
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    const dropdowns = document.querySelectorAll('.dropdown');
+
+    if (menuToggle) {
+      menuToggle.addEventListener('click', function(e) {
+        e.stopPropagation();
+        navLinks.classList.toggle('show');
+      });
+    }
+
+    dropdowns.forEach(function(dropdown) {
+      const iconBtn = dropdown.querySelector('.dropdown-icon');
+      if (iconBtn) {
+        iconBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          dropdowns.forEach(d => { if (d !== dropdown) d.classList.remove('active'); });
+          dropdown.classList.toggle('active');
+        });
+      }
+    });
+
+    document.addEventListener('click', function(e) {
+      let inside = false;
+      dropdowns.forEach(d => { if (d.contains(e.target)) inside = true; });
+      if (!inside && menuToggle && !menuToggle.contains(e.target)) {
+        dropdowns.forEach(d => d.classList.remove('active'));
+        if (navLinks) navLinks.classList.remove('show');
+      }
+    });
+
+    // Back to top
+    const backToTop = document.querySelector('.back-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) backToTop.style.opacity = '1';
+      else backToTop.style.opacity = '0.9';
+    });
+  </script>
+</body>
+</html>

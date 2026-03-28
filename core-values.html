@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <link rel="icon" type="image/png" href="images/logo.png">
+  <title>Helping Hands Uganda | Core Values</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #800000;
+      --primary-light: #a04545;
+      --secondary: #6b2d2d;
+      --accent: #a52a2a;
+      --dark: #330000;
+      --soft-bg: #fef8f2;
+      --shadow: 0 8px 20px rgba(100, 30, 0, 0.12);
+      --nav-bg: rgb(238, 219, 219);
+      --dropdown-bg: #ffffff;
+    }
+
+    body {
+      background: url('https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover fixed no-repeat;
+      font-family: 'Times New Roman', Times, serif;
+      line-height: 1.6;
+      color: #1f1a17;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(2px);
+      z-index: -2;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+
+    /* NAVBAR */
+    .navbar {
+      background: var(--nav-bg);
+      box-shadow: var(--shadow);
+      padding: 0.5rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      width: 100%;
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: clamp(1.2rem, 4vw, 1.8rem);
+      color: var(--primary);
+    }
+    
+    .logo-img {
+      height: 50px;
+      width: auto;
+      border-radius: 8px;
+      background: white;
+      padding: 3px;
+    }
+
+    .menu-icon {
+      display: none;
+      font-size: 2.4rem;
+      color: var(--primary);
+      cursor: pointer;
+      padding: 0.5rem 1rem;
+      transition: transform 0.2s;
+    }
+.menu-icon:hover {
+      transform: scale(1.05);
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .nav-link {
+      font-size: 1rem;
+      padding: 0.7rem 1.3rem;
+      border-radius: 40px;
+      color: var(--dark);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.3s;
+      font-weight: 500;
+    }
+
+    .nav-link:hover {
+      background: rgba(128,0,0,0.08);
+       transform: translateY(-2px);
+    }
+
+    .nav-link.active-home {
+      background: var(--primary);
+      color: white !important;
+    }
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-link-wrapper {
+      display: flex;
+      align-items: center;
+      background: transparent;
+      border-radius: 40px;
+      overflow: hidden;
+    }
+
+    .dropdown-text {
+      font-size: 1rem;
+      padding: 0.7rem 0.5rem 0.7rem 1.3rem;
+      color: var(--dark);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 500;
+    }
+
+    .dropdown-text:hover {
+      background: rgba(128,0,0,0.08);
+    }
+
+    .dropdown-icon {
+      font-size: 1rem;
+      padding: 0.7rem 1.3rem 0.7rem 0.5rem;
+      color: var(--dark);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .dropdown-icon i {
+      font-size: 0.7rem;
+      transition: transform 0.2s;
+    }
+
+    .dropdown-icon:hover {
+      background: rgba(128,0,0,0.08);
+    }
+
+    .dropdown.active .dropdown-icon i {
+      transform: rotate(180deg);
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      min-width: 240px;
+      background: var(--dropdown-bg);
+      border-radius: 20px;
+      box-shadow: 0 20px 35px rgba(0,0,0,0.2);
+      padding: 0.8rem 0;
+      z-index: 1000;
+      margin-top: 5px;
+      border: 1px solid #f0e0e0;
+    }
+
+    .dropdown.active .dropdown-content {
+      display: block;
+    }
+
+    .dropdown-content a {
+      color: var(--dark);
+      padding: 0.8rem 1.8rem;
+      text-decoration: none;
+      display: block;
+      transition: all 0.2s;
+    }
+
+    .dropdown-content a:hover {
+      background: #f0e6e0;
+      color: var(--primary);
+      padding-left: 2rem;
+    }
+
+    .btn {
+      padding: 0.7rem 1.6rem;
+      border-radius: 60px;
+      background: linear-gradient(135deg, #ffb347, #ff8c1a);
+      color: #2d1b0c;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-left: 0.3rem;
+      font-weight: bold;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s;
+    }
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+      background: linear-gradient(135deg, #ffc26b, #ffa133);
+    }
+    /* Page Header */
+    .page-header {
+      background: linear-gradient(135deg, #6d2e2e 0%, #4d1f1f 100%);
+      color: white;
+      padding: 4rem 0 3.5rem;
+      text-align: center;
+      border-bottom-left-radius: 3rem;
+      border-bottom-right-radius: 3rem;
+      margin: 1.5rem 0 2rem 0;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
+    }
+
+    .page-header h1 {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .page-header p {
+      font-size: 1.3rem;
+      max-width: 700px;
+      margin: 0 auto;
+      opacity: 0.95;
+    }
+
+    /* Main Content */
+    .values-section {
+      padding: 2rem 0 5rem;
+    }
+
+    .content-card {
+      background: rgba(255, 252, 245, 0.95);
+      backdrop-filter: blur(4px);
+      border-radius: 2rem;
+      padding: 2.5rem;
+      margin-bottom: 2.5rem;
+      box-shadow: 0 20px 35px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s;
+    }
+
+    .content-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .section-title {
+      color: var(--primary);
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 60px;
+      height: 4px;
+      background: var(--secondary);
+      border-radius: 2px;
+    }
+
+    /* Core Values Grid */
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+
+    .value-card {
+      background: white;
+      border-radius: 1.5rem;
+      padding: 2rem;
+      text-align: center;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .value-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, var(--primary), var(--gold));
+      transform: scaleX(0);
+      transition: transform 0.4s ease;
+    }
+
+    .value-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .value-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 35px rgba(0, 0, 0, 0.15);
+    }
+
+    .value-icon {
+      font-size: 3.5rem;
+      color: var(--primary);
+      margin-bottom: 1.2rem;
+      display: inline-block;
+      transition: transform 0.3s;
+    }
+
+    .value-card:hover .value-icon {
+      transform: scale(1.1);
+    }
+
+    .value-card h3 {
+      color: var(--primary);
+      font-size: 1.6rem;
+      margin-bottom: 1rem;
+    }
+
+    .value-card p {
+      color: #5a3a2a;
+      line-height: 1.7;
+    }
+
+    .value-quote {
+      margin-top: 1.2rem;
+      font-style: italic;
+      font-size: 0.9rem;
+      color: var(--primary);
+      border-top: 1px solid rgba(128, 0, 0, 0.2);
+      padding-top: 1rem;
+    }
+
+    /* Value in Action Section */
+    .action-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.8rem;
+      margin-top: 1.5rem;
+    }
+
+    .action-card {
+      background: white;
+      border-radius: 1.2rem;
+      padding: 1.5rem;
+      transition: all 0.3s;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      border-left: 4px solid var(--primary);
+    }
+
+    .action-card:hover {
+      transform: translateX(5px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+    }
+
+    .action-card h4 {
+      color: var(--primary);
+      font-size: 1.2rem;
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .action-card p {
+      color: #5a3a2a;
+    }
+
+    /* Principles Section */
+    .principles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .principle-item {
+      background: rgba(128, 0, 0, 0.05);
+      border-radius: 1rem;
+      padding: 1.2rem;
+      text-align: center;
+    }
+
+    .principle-item i {
+      font-size: 1.8rem;
+      color: var(--primary);
+      margin-bottom: 0.8rem;
+    }
+
+    .principle-item h4 {
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    /* Quote Section */
+    .founder-quote {
+      background: linear-gradient(135deg, rgba(128, 0, 0, 0.1), rgba(100, 50, 30, 0.1));
+      padding: 2rem;
+      border-radius: 1.5rem;
+      margin: 1.5rem 0;
+      text-align: center;
+    }
+
+    .quote-text {
+      font-size: 1.2rem;
+      font-style: italic;
+      color: #3d2c24;
+      line-height: 1.7;
+    }
+
+    .quote-author {
+      margin-top: 1rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    /* Stats Row */
+    .stats-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      gap: 2rem;
+      margin: 2rem 0;
+      text-align: center;
+    }
+
+    .stat-box {
+      flex: 1;
+      min-width: 150px;
+      background: rgba(128, 0, 0, 0.1);
+      padding: 1.5rem;
+      border-radius: 1.5rem;
+      transition: transform 0.3s;
+    }
+
+    .stat-box:hover {
+      transform: translateY(-5px);
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      color: #5a3a2a;
+    }
+
+  /* Footer */
+    .footer {
+      background: var(--dark);
+      backdrop-filter: blur(5px);
+      color: #f0e2d4;
+      padding: 3.5rem 0 2rem;
+      margin-top: 1rem;
+      border-top: 1px solid rgba(255, 200, 150, 0.3);
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2.5rem;
+    }
+    .footer h4 {
+      color: white;
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+    .footer a {
+      color: #e0b0b0;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    .footer a:hover {
+      color: white;
+      transform: translateX(5px);
+    }
+    .footer-bottom {
+      text-align: center;
+      padding-top: 1.8rem;
+      border-top: 1px solid #5f4b4b;
+    }
+    .back-to-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: var(--primary);
+      color: white;
+      padding: 0.8rem 1.3rem;
+      border-radius: 60px;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+     transition: all 0.3s;
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.4);
+      z-index: 99;
+      font-weight: bold;
+    }
+    .back-to-top:hover {
+      background: #9e3a3a;
+      transform: translateY(-5px);
+    }
+
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .menu-icon {
+        display: block;
+      }
+      .nav-links {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        background: rgba(46, 26, 26, 0.97);
+        backdrop-filter: blur(8px);
+        padding: 1.5rem;
+        border-radius: 2rem;
+        margin-top: 1rem;
+      }
+      .nav-links.show {
+        display: flex;
+      }
+      .dropdown {
+        width: 100%;
+      }
+      .dropdown-link-wrapper {
+        width: 100%;
+      }
+      .dropdown-content {
+        position: relative;
+        width: 100%;
+        background: #2b1a16;
+      }
+      .dropdown-content a {
+        color: #ffded0;
+      }
+      .nav-link {
+        width: 100%;
+        justify-content: center;
+      }
+      .btn {
+        width: 100%;
+        justify-content: center;
+      }
+      
+      .section-title::after {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      .section-title {
+        display: block;
+        text-align: center;
+      }
+      
+      .values-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 550px) {
+      .container {
+        padding: 0 1rem;
+      }
+      .content-card {
+        padding: 1.5rem;
+      }
+      .stats-row {
+        flex-direction: column;
+      }
+      .value-card {
+        padding: 1.5rem;
+      }
+      .value-card h3 {
+        font-size: 1.3rem;
+      }
+      .quote-text {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="container nav-container">
+      <div class="logo">
+        <img src="images/logo.png" alt="Logo" class="logo-img" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'50\' height=\'50\' viewBox=\'0 0 50 50\'%3E%3Crect width=\'50\' height=\'50\' fill=\'%23800000\' rx=\'10\'/%3E%3Ctext x=\'8\' y=\'38\' fill=\'white\' font-size=\'35\'%3E🤝%3C/text%3E%3C/svg%3E'">
+        <span>Helping Hands Uganda</span>
+      </div>
+      <div class="menu-icon" id="menuToggle">
+        <i class="fas fa-bars"></i>
+      </div>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a>
+        <div class="dropdown" id="aboutDropdown">
+          <div class="dropdown-link-wrapper">
+            <a href="about.html" class="dropdown-text"><i class="fas fa-info-circle"></i> About Us</a>
+            <button class="dropdown-icon" aria-label="Toggle dropdown"><i class="fas fa-chevron-down"></i></button>
+          </div>
+          <div class="dropdown-content">
+            <a href="who-we-are.html">Who we are</a>
+            <a href="history.html">Our history</a>
+            <a href="mission-vision.html">Mission & Vision</a>
+            <a href="beneficiaries.html">Beneficiaries</a>
+            <a href="core-values.html">Core values</a>
+          </div>
+        </div>
+        <div class="dropdown" id="projectsDropdown">
+          <div class="dropdown-link-wrapper">
+            <a href="projects.html" class="dropdown-text"><i class="fas fa-leaf"></i> Projects</a>
+            <button class="dropdown-icon" aria-label="Toggle dropdown"><i class="fas fa-chevron-down"></i></button>
+          </div>
+          <div class="dropdown-content">
+            <a href="orphan-care.html">Orphan care & shelter</a>
+            <a href="education-support.html">Education support</a>
+            <a href="women-empowerment.html">Women empowerment</a>
+            <a href="sacco-loans.html">SACCO & loans</a>
+            <a href="water-sanitation.html">Water & sanitation</a>
+            <a href="humanitarian-aid.html">Humanitarian aid</a>
+          </div>
+        </div>
+        <a href="gallery.html" class="nav-link"><i class="fas fa-images"></i> Gallery</a>
+        <a href="contact.html" class="nav-link"><i class="fas fa-envelope"></i> Contact Us</a>
+        <a href="donate.html" class="btn"><i class="fas fa-donate"></i> Donate now</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <section class="page-header">
+    <div class="container">
+      <h1>Our Core Values</h1>
+      <p>The principles that guide our work, shape our decisions, and define who we are</p>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <section class="values-section">
+    <div class="container">
+      
+      <!-- Introduction -->
+      <div class="content-card">
+        <h2 class="section-title">What We Stand For</h2>
+        <p style="font-size: 1.1rem; margin-bottom: 1rem;">At Helping Hands Uganda, our values are more than words on paper — they are the foundation of everything we do. They guide how we serve our communities, how we treat one another, and how we measure our impact.</p>
+        <p>Every decision we make, every program we implement, and every relationship we build is rooted in these core principles. They reflect our commitment to serving with integrity, compassion, and unwavering dedication to the dignity of every person we encounter.</p>
+        
+        <div class="stats-row">
+          <div class="stat-box">
+            <div class="stat-number">6</div>
+            <div class="stat-label">Core Values</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-number">2022</div>
+            <div class="stat-label">Values Established</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-number">15</div>
+            <div class="stat-label">Founding Members</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-number">100%</div>
+            <div class="stat-label">Commitment to Integrity</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Core Values Grid -->
+      <div class="content-card">
+        <h2 class="section-title">Our Six Core Values</h2>
+        <div class="values-grid">
+          
+          <div class="value-card">
+            <div class="value-icon"><i class="fas fa-heart"></i></div>
+            <h3>Compassion</h3>
+            <p>Serving with empathy, kindness, and genuine care for every individual we meet. We see the person behind every struggle and respond with love and understanding.</p>
+            <div class="value-quote">"We serve because we care, not because we must."</div>
+          </div>
+          
+          <div class="value-card">
+            <div class="value-icon"><i class="fas fa-balance-scale"></i></div>
+            <h3>Integrity</h3>
+            <p>Doing what is right, even when no one is watching. Honesty in all our actions, transparency in our operations, and consistency between our words and deeds.</p>
+            <div class="value-quote">"Our word is our bond. We do what we say, and we say what we do."</div>
+          </div>
+          
+          <div class="value-card">
+            <div class="value-icon"><i class="fas fa-eye"></i></div>
+            <h3>Transparency</h3>
+            <p>Open and accountable operations, ensuring donors, partners, and communities see our impact. We share both our successes and our challenges with honesty.</p>
+            <div class="value-quote">"Sunlight is the best disinfectant. We operate in the open."</div>
+          </div>
+          
+          <div class="value-card">
+            <div class="value-icon"><i class="fas fa-hand-holding-heart"></i></div>
+            <h3>Community Empowerment</h3>
+            <p>Building capacity from within, enabling communities to create lasting change. We don't give handouts; we provide tools for self-sufficiency.</p>
+            <div class="value-quote">"Give a person a fish, feed them for a day. Teach them to fish, feed them for a lifetime."</div>
+          </div>
+          
+          <div class="value-card">
+            <div class="value-icon"><i class="fas fa-check-circle"></i></div>
+            <h3>Accountability</h3>
+            <p>Responsible to those we serve, our donors, and our partners for every decision made. We answer for our actions and learn from our mistakes.</p>
+            <div class="value-quote">"We are stewards of the trust placed in us."</div>
+          </div>
+          
+          <div class="value-card">
+            <div class="value-icon"><i class="fas fa-users"></i></div>
+            <h3>Human Dignity</h3>
+            <p>Respecting the inherent worth and value of every person regardless of their background, circumstances, or struggles. Every life matters.</p>
+            <div class="value-quote">"Every person deserves to be treated with respect and honor."</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Values in Action -->
+      <div class="content-card">
+        <h2 class="section-title">Our Values in Action</h2>
+        <p style="margin-bottom: 1rem;">These values aren't just ideals — they shape how we work every day:</p>
+        <div class="action-grid">
+          <div class="action-card">
+            <h4><i class="fas fa-home"></i> Compassion in Shelter</h4>
+            <p>We provide a loving home environment for orphaned children, ensuring they feel safe, valued, and cared for as part of a family, not just a facility.</p>
+          </div>
+          <div class="action-card">
+            <h4><i class="fas fa-file-invoice-dollar"></i> Integrity in Finance</h4>
+            <p>Two authorized signatories required for all transactions. Annual audits presented to members. Every shilling accounted for and used for its intended purpose.</p>
+          </div>
+          <div class="action-card">
+            <h4><i class="fas fa-chart-line"></i> Transparency in Reporting</h4>
+            <p>Annual General Meetings open to all members. Financial reports shared publicly. Donors receive updates on how their contributions are making a difference.</p>
+          </div>
+          <div class="action-card">
+            <h4><i class="fas fa-female"></i> Empowerment in Action</h4>
+            <p>Tailoring skills training that gives women the tools to earn their own income. SACCO loans that help farmers and small business owners build economic independence.</p>
+          </div>
+          <div class="action-card">
+            <h4><i class="fas fa-clipboard-list"></i> Accountability in Leadership</h4>
+            <p>Board of Directors elected by members. Regular reviews of programs. Community feedback incorporated into decision-making.</p>
+          </div>
+          <div class="action-card">
+            <h4><i class="fas fa-child"></i> Dignity in Care</h4>
+            <p>Every child in our care is treated with respect, given a voice, and supported to pursue their dreams. We never label or stigmatize those we serve.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Constitutional Principles -->
+      <div class="content-card">
+        <h2 class="section-title">Our Constitutional Principles</h2>
+        <p style="margin-bottom: 1rem;">These values are formally enshrined in our organization's constitution, ensuring they guide us for generations to come:</p>
+        <div class="principles-grid">
+          <div class="principle-item">
+            <i class="fas fa-hand-holding-usd"></i>
+            <h4>Non-Profit Operation</h4>
+            <p>No member benefits financially from the organization's work</p>
+          </div>
+          <div class="principle-item">
+            <i class="fas fa-church"></i>
+            <h4>Non-Political & Non-Religious</h4>
+            <p>Serving all regardless of political or religious affiliation</p>
+          </div>
+          <div class="principle-item">
+            <i class="fas fa-chart-simple"></i>
+            <h4>Sustainable Development</h4>
+            <p>Creating lasting change, not temporary fixes</p>
+          </div>
+          <div class="principle-item">
+            <i class="fas fa-handshake"></i>
+            <h4>Community Participation</h4>
+            <p>Involving communities in decisions that affect them</p>
+          </div>
+          <div class="principle-item">
+            <i class="fas fa-shield-heart"></i>
+            <h4>Child Protection</h4>
+            <p>Commitment to safeguarding every child from harm</p>
+          </div>
+          <div class="principle-item">
+            <i class="fas fa-globe"></i>
+            <h4>Partnership Collaboration</h4>
+            <p>Working with others who share our values</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Founder's Reflection -->
+      <div class="content-card">
+        <h2 class="section-title">From Our Founder</h2>
+        <div class="founder-quote">
+          <div class="quote-text">
+            <i class="fas fa-quote-left" style="color: var(--primary); margin-right: 10px;"></i>
+            These values were born from my own experiences of hardship and hope. When I was a child facing uncertainty, what I needed most was compassion, integrity, and someone who saw my dignity. Today, these values guide everything we do at Helping Hands Uganda. They are not just words on a page — they are the promises we make to every child, every woman, and every family we serve.
+            <i class="fas fa-quote-right" style="color: var(--primary); margin-left: 10px;"></i>
+          </div>
+          <div class="quote-author">
+            — Bukama Hakim, Founder & Chairperson
+          </div>
+        </div>
+        <p style="margin-top: 1rem;">Bukama's personal journey from vulnerability to leadership gives him a unique understanding of what it means to be served with dignity. His commitment to these values ensures that Helping Hands Uganda remains true to its mission of restoring hope and opportunity to those who need it most.</p>
+      </div>
+
+      <!-- Value Promise -->
+      <div class="content-card" style="text-align: center; background: linear-gradient(135deg, rgba(128,0,0,0.95), rgba(100,50,30,0.95)); color: white;">
+        <h2 style="color: white; margin-bottom: 1rem;">Our Promise to You</h2>
+        <p style="margin-bottom: 1rem;">When you support Helping Hands Uganda, you can trust that your contribution is handled with integrity, used with transparency, and directed toward programs that empower communities with compassion and respect for human dignity.</p>
+        <div class="stats-row" style="margin: 1.5rem 0;">
+          <div class="stat-box" style="background: rgba(255,255,255,0.15);">
+            <div class="stat-number" style="color: white;">100%</div>
+            <div class="stat-label" style="color: #ffddbb;">Accountability</div>
+          </div>
+          <div class="stat-box" style="background: rgba(255,255,255,0.15);">
+            <div class="stat-number" style="color: white;">Open</div>
+            <div class="stat-label" style="color: #ffddbb;">Transparency</div>
+          </div>
+          <div class="stat-box" style="background: rgba(255,255,255,0.15);">
+            <div class="stat-number" style="color: white;">Always</div>
+            <div class="stat-label" style="color: #ffddbb;">Compassionate</div>
+          </div>
+        </div>
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+          <a href="donate.html" style="background: #ffb347; color: #2d1b0c; padding: 0.8rem 2rem; border-radius: 60px; text-decoration: none; font-weight: bold;"><i class="fas fa-donate"></i> Support Our Values</a>
+          <a href="contact.html" style="background: transparent; border: 2px solid white; color: white; padding: 0.8rem 2rem; border-radius: 60px; text-decoration: none; font-weight: bold;"><i class="fas fa-envelope"></i> Learn More</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+   <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div><h4><i class="fas fa-hand-holding-heart"></i> Helping Hands Uganda</h4><p>Humya 1, LC I<br>Buhundu Parish<br>Bukonzo Subcounty<br>Bundibugyo District, Uganda</p></div>
+        <div><h4>Quick Links</h4><a href="about.html">About Us</a><a href="projects.html">Our Projects</a><a href="gallery.html">Gallery</a><a href="contact.html">Contact</a></div>
+        <div><h4>Contact Info</h4><a href="tel:+256764377294"><i class="fas fa-phone"></i> +256 764377294</a><a href="mailto:info@helpinghandsug.org"><i class="fas fa-envelope"></i> info@helpinghandsug.org</a></div>
+        <div><h4>Connect With Us</h4><div style="font-size: 1.8rem; letter-spacing: 0.5rem;"><i class="fab fa-facebook"></i><i class="fab fa-x-twitter"></i><i class="fab fa-instagram"></i><i class="fab fa-whatsapp"></i></div></div>
+      </div>
+      <div class="footer-bottom"><p>© 2025 Helping Hands Uganda. All rights reserved.</p><p>Registered Community Based Organization - Bundibugyo District, Uganda</p></div>
+    </div>
+  </footer>
+  <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i> Back to top</a>
+
+  <script>
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    const dropdowns = document.querySelectorAll('.dropdown');
+
+    if (menuToggle) {
+      menuToggle.addEventListener('click', function(e) {
+        e.stopPropagation();
+        navLinks.classList.toggle('show');
+      });
+    }
+
+    dropdowns.forEach(function(dropdown) {
+      const iconBtn = dropdown.querySelector('.dropdown-icon');
+      if (iconBtn) {
+        iconBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          dropdowns.forEach(d => { if (d !== dropdown) d.classList.remove('active'); });
+          dropdown.classList.toggle('active');
+        });
+      }
+    });
+
+    document.addEventListener('click', function(e) {
+      let inside = false;
+      dropdowns.forEach(d => { if (d.contains(e.target)) inside = true; });
+      if (!inside && menuToggle && !menuToggle.contains(e.target)) {
+        dropdowns.forEach(d => d.classList.remove('active'));
+        if (navLinks) navLinks.classList.remove('show');
+      }
+    });
+
+    // Back to top
+    const backToTop = document.querySelector('.back-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) backToTop.style.opacity = '1';
+      else backToTop.style.opacity = '0.9';
+    });
+  </script>
+</body>
+</html>

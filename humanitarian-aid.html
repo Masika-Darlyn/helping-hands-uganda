@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <link rel="icon" type="image/png" href="images/logo.png">
+  <title>Helping Hands Uganda | Humanitarian Aid</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+        :root {
+      --primary: #800000;
+      --primary-light: #a04545;
+      --secondary: #6b2d2d;
+      --accent: #a52a2a;
+      --dark: #330000;
+      --soft-bg: rgba(254, 248, 242, 0.94);
+      --shadow: 0 8px 20px rgba(100, 30, 0, 0.12);
+      --nav-bg: rgb(238, 219, 219);
+      --dropdown-bg: #ffffff;
+    }
+
+    body {
+      background: url('https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover fixed no-repeat;
+      font-family: 'Times New Roman', Times, serif;
+      line-height: 1.6;
+      color: #1f1a17;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(2px);
+      z-index: -2;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* NAVBAR with beautiful background color */
+    .navbar {
+      background: var(--nav-bg);
+      box-shadow: var(--shadow);
+      padding: 0.5rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      width: 100%;
+
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: clamp(1.2rem, 4vw, 1.8rem);
+        color: var(--primary);
+    }
+
+    .logo-img {
+      height: 50px;
+      width: auto;
+      border-radius: 8px;
+      background: white;
+      padding: 3px;
+    }
+
+    .menu-icon {
+      display: none;
+      font-size: 2.4rem;
+      color: var(--primary);
+      cursor: pointer;
+      padding: 0.5rem 1rem;
+      transition: transform 0.2s;
+    }
+
+    .menu-icon:hover {
+      transform: scale(1.05);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .nav-link {
+      font-size: 1rem;
+      padding: 0.7rem 1.3rem;
+      border-radius: 40px;
+       color: var(--dark);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.3s;
+      font-weight: 500;
+    }
+
+    .nav-link:hover {
+      background: rgba(128,0,0,0.08);
+       transform: translateY(-2px);
+    }
+
+    .nav-link.active-home {
+      background: var(--primary);
+      color: white !important;
+       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Dropdown styles */
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-link-wrapper {
+      display: flex;
+      align-items: center;
+      background: transparent;
+      border-radius: 40px;
+      overflow: hidden;
+    }
+
+    .dropdown-text {
+      font-size: 1rem;
+      padding: 0.7rem 0.5rem 0.7rem 1.3rem;
+      color: var(--dark);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 500;
+    }
+
+    .dropdown-text:hover {
+      background: rgba(128,0,0,0.08);
+    }
+
+    .dropdown-icon {
+      font-size: 1rem;
+      padding: 0.7rem 1.3rem 0.7rem 0.5rem;
+      color: var(--dark);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .dropdown-icon i {
+      font-size: 0.7rem;
+      transition: transform 0.2s;
+    }
+
+    .dropdown.active .dropdown-icon i {
+      transform: rotate(180deg);
+    }
+ .dropdown-icon:hover {
+      background: rgba(128,0,0,0.08);
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      min-width: 240px;
+      background: var(--dropdown-bg);
+      border-radius: 20px;
+      box-shadow: 0 20px 35px rgba(0, 0, 0, 0.2);
+      padding: 0.8rem 0;
+      z-index: 1000;
+      margin-top: 5px;
+      border: 1px solid #f0e0e0;
+    }
+
+    .dropdown.active .dropdown-content {
+      display: block;
+    }
+
+    .dropdown-content a {
+      color: var(--dark);
+      padding: 0.8rem 1.8rem;
+      text-decoration: none;
+      display: block;
+      transition: all 0.2s;
+    }
+
+    .dropdown-content a:hover {
+      background: #f0e6e0;
+      color: var(--primary);
+      padding-left: 2rem;
+    }
+
+    .btn {
+      padding: 0.7rem 1.6rem;
+      border-radius: 60px;
+      background: linear-gradient(135deg, #ffb347, #ff8c1a);
+      color: #2d1b0c;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-left: 0.3rem;
+      font-weight: bold;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+      background: linear-gradient(135deg, #ffc26b, #ffa133);
+    }
+
+    /* Page Header */
+    .page-header {
+      background: linear-gradient(135deg, #6d2e2e 0%, #4d1f1f 100%);
+      color: white;
+      padding: 4rem 0 3.5rem;
+      text-align: center;
+      border-bottom-left-radius: 3rem;
+      border-bottom-right-radius: 3rem;
+      margin: 1.5rem 0 2rem 0;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
+    }
+
+    .page-header h1 {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .page-header p {
+      font-size: 1.3rem;
+      max-width: 700px;
+      margin: 0 auto;
+      opacity: 0.95;
+    }
+
+    /* Main Content */
+    .aid-section {
+      padding: 2rem 0 5rem;
+    }
+
+    .content-card {
+      background: rgba(255, 252, 245, 0.95);
+      backdrop-filter: blur(4px);
+      border-radius: 2rem;
+      padding: 2.5rem;
+      margin-bottom: 2.5rem;
+      box-shadow: 0 20px 35px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s;
+    }
+
+    .content-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .section-title {
+      color: var(--primary);
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 60px;
+      height: 4px;
+      background: var(--secondary);
+      border-radius: 2px;
+    }
+
+    /* Stats Row */
+    .stats-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      gap: 2rem;
+      margin: 2rem 0;
+      text-align: center;
+    }
+
+    .stat-box {
+      flex: 1;
+      min-width: 150px;
+      background: rgba(128, 0, 0, 0.1);
+      padding: 1.5rem;
+      border-radius: 1.5rem;
+      transition: transform 0.3s;
+    }
+
+    .stat-box:hover {
+      transform: translateY(-5px);
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      color: #5a3a2a;
+    }
+
+    /* Info Grid */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+
+    .info-card {
+      background: white;
+      padding: 1.8rem;
+      border-radius: 1.5rem;
+      transition: all 0.3s;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .info-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+    }
+
+    .info-card i {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .info-card h3 {
+      color: var(--primary);
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Aid Programs */
+    .programs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+
+    .program-card {
+      background: white;
+      border-radius: 1.5rem;
+      overflow: hidden;
+      transition: all 0.4s;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .program-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 35px rgba(0, 0, 0, 0.15);
+    }
+
+    .program-header {
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      padding: 1.5rem;
+      color: white;
+      text-align: center;
+    }
+
+    .program-header i {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .program-header h3 {
+      font-size: 1.3rem;
+    }
+
+    .program-content {
+      padding: 1.5rem;
+    }
+
+    .program-content p {
+      color: #5a3a2a;
+      margin-bottom: 1rem;
+    }
+
+    /* Emergency Response */
+    .emergency-card {
+      background: linear-gradient(135deg, rgba(230, 126, 34, 0.1), rgba(128, 0, 0, 0.1));
+      border-radius: 1.5rem;
+      padding: 2rem;
+      margin: 1.5rem 0;
+      border-left: 5px solid var(--orange);
+    }
+
+    /* Testimonial */
+    .testimonial-card {
+      background: linear-gradient(135deg, rgba(128, 0, 0, 0.05), rgba(100, 50, 30, 0.05));
+      border-radius: 1.5rem;
+      padding: 2rem;
+      margin: 1.5rem 0;
+      text-align: center;
+    }
+
+    .testimonial-text {
+      font-size: 1.1rem;
+      font-style: italic;
+      color: #3d2c24;
+    }
+
+    .testimonial-author {
+      margin-top: 1rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    /* Needs Grid */
+    .needs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .need-item {
+      background: white;
+      padding: 1.2rem;
+      border-radius: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      transition: all 0.3s;
+    }
+
+    .need-item:hover {
+      transform: translateX(5px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .need-icon {
+      width: 50px;
+      height: 50px;
+      background: rgba(128, 0, 0, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: var(--primary);
+    }
+
+    .need-content h4 {
+      color: var(--primary);
+      margin-bottom: 0.3rem;
+    }
+
+    .need-content p {
+      font-size: 0.9rem;
+      color: #5a3a2a;
+    }
+
+   /* Footer */
+    .footer {
+      background: var(--dark);
+      backdrop-filter: blur(5px);
+      color: #f0e2d4;
+      padding: 3.5rem 0 2rem;
+      margin-top: 1rem;
+      border-top: 1px solid rgba(255, 200, 150, 0.3);
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2.5rem;
+    }
+    .footer h4 {
+      color: white;
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+    .footer a {
+      color: #e0b0b0;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    .footer a:hover {
+      color: white;
+      transform: translateX(5px);
+    }
+    .footer-bottom {
+      text-align: center;
+      padding-top: 1.8rem;
+      border-top: 1px solid #5f4b4b;
+    }
+    .back-to-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: var(--primary);
+      color: white;
+      padding: 0.8rem 1.3rem;
+      border-radius: 60px;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+     transition: all 0.3s;
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.4);
+      z-index: 99;
+      font-weight: bold;
+    }
+    .back-to-top:hover {
+      background: #9e3a3a;
+      transform: translateY(-5px);
+    }
+
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .menu-icon {
+        display: block;
+      }
+      .nav-links {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        background: rgba(46, 26, 26, 0.97);
+        backdrop-filter: blur(8px);
+        padding: 1.5rem;
+        border-radius: 2rem;
+        margin-top: 1rem;
+      }
+      .nav-links.show {
+        display: flex;
+      }
+      .dropdown {
+        width: 100%;
+      }
+      .dropdown-link-wrapper {
+        width: 100%;
+      }
+      .dropdown-content {
+        position: relative;
+        width: 100%;
+        background: #2b1a16;
+      }
+      .dropdown-content a {
+        color: #ffded0;
+      }
+      .nav-link {
+        width: 100%;
+        justify-content: center;
+      }
+      .btn {
+        width: 100%;
+        justify-content: center;
+      }
+      
+      .section-title::after {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      .section-title {
+        display: block;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 550px) {
+      .container {
+        padding: 0 1rem;
+      }
+      .content-card {
+        padding: 1.5rem;
+      }
+      .stats-row {
+        flex-direction: column;
+      }
+      .need-item {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="container nav-container">
+      <div class="logo">
+        <img src="images/logo.png" alt="Logo" class="logo-img" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'50\' height=\'50\' viewBox=\'0 0 50 50\'%3E%3Crect width=\'50\' height=\'50\' fill=\'%23800000\' rx=\'10\'/%3E%3Ctext x=\'8\' y=\'38\' fill=\'white\' font-size=\'35\'%3E🤝%3C/text%3E%3C/svg%3E'">
+        <span>Helping Hands Uganda</span>
+      </div>
+      <div class="menu-icon" id="menuToggle">
+        <i class="fas fa-bars"></i>
+      </div>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a>
+        <div class="dropdown" id="aboutDropdown">
+          <div class="dropdown-link-wrapper">
+            <a href="about.html" class="dropdown-text"><i class="fas fa-info-circle"></i> About Us</a>
+            <button class="dropdown-icon" aria-label="Toggle dropdown"><i class="fas fa-chevron-down"></i></button>
+          </div>
+          <div class="dropdown-content">
+            <a href="who-we-are.html">Who we are</a>
+            <a href="history.html">Our history</a>
+            <a href="mission-vision.html">Mission & Vision</a>
+            <a href="beneficiaries.html">Beneficiaries</a>
+            <a href="core-values.html">Core values</a>
+          </div>
+        </div>
+        <div class="dropdown" id="projectsDropdown">
+          <div class="dropdown-link-wrapper">
+            <a href="projects.html" class="dropdown-text active-home"><i class="fas fa-leaf"></i> Projects</a>
+            <button class="dropdown-icon" aria-label="Toggle dropdown"><i class="fas fa-chevron-down"></i></button>
+          </div>
+          <div class="dropdown-content">
+            <a href="orphan-care.html">Orphan care & shelter</a>
+            <a href="education-support.html">Education support</a>
+            <a href="women-empowerment.html">Women empowerment</a>
+            <a href="sacco-loans.html">SACCO & loans</a>
+            <a href="water-sanitation.html">Water & sanitation</a>
+            <a href="humanitarian-aid.html">Humanitarian aid</a>
+          </div>
+        </div>
+        <a href="gallery.html" class="nav-link"><i class="fas fa-images"></i> Gallery</a>
+        <a href="contact.html" class="nav-link"><i class="fas fa-envelope"></i> Contact Us</a>
+        <a href="donate.html" class="btn"><i class="fas fa-donate"></i> Donate now</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <section class="page-header">
+    <div class="container">
+      <h1>Humanitarian Aid</h1>
+      <p>Extending a helping hand to vulnerable individuals and families in times of crisis</p>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <section class="aid-section">
+    <div class="container">
+      
+      <!-- Introduction -->
+      <div class="content-card">
+        <h2 class="section-title">Responding to Immediate Needs with Compassion</h2>
+        <p style="font-size: 1.1rem; margin-bottom: 1rem;">In rural communities across Bundibugyo District, many families face daily struggles just to meet their most basic needs. Poverty, illness, natural disasters, and family emergencies can push already vulnerable households into crisis.</p>
+        <p>Helping Hands Uganda provides emergency humanitarian assistance to vulnerable individuals and families when they need it most. Our aid programs offer immediate relief while also working toward long-term solutions that build resilience and self-sufficiency.</p>
+        
+        <div class="stats-row">
+          <div class="stat-box">
+            <div class="stat-number">Families</div>
+            <div class="stat-label">Supported Annually</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-number">Emergency</div>
+            <div class="stat-label">Response Ready</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-number">Essential</div>
+            <div class="stat-label">Items Distributed</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-number">2022</div>
+            <div class="stat-label">Program Started</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- What We Provide -->
+      <div class="content-card">
+        <h2 class="section-title">What We Provide</h2>
+        <div class="programs-grid">
+          <div class="program-card">
+            <div class="program-header">
+              <i class="fas fa-tshirt"></i>
+              <h3>Clothing & Bedding</h3>
+            </div>
+            <div class="program-content">
+              <p>Providing essential clothing for children and adults, including school uniforms, everyday wear, and warm clothing for cold seasons. We also distribute bedding, blankets, and sleeping mats to families in need.</p>
+            </div>
+          </div>
+          <div class="program-card">
+            <div class="program-header">
+              <i class="fas fa-home"></i>
+              <h3>Shelter Support</h3>
+            </div>
+            <div class="program-content">
+              <p>Assisting families whose homes have been damaged by storms or natural disasters. We provide temporary shelter solutions and materials for home repairs when possible.</p>
+            </div>
+          </div>
+          <div class="program-card">
+            <div class="program-header">
+              <i class="fas fa-boxes"></i>
+              <h3>Household Necessities</h3>
+            </div>
+            <div class="program-content">
+              <p>Distributing essential household items including cooking utensils, hygiene supplies, soap, and basic furniture to families starting over after loss or displacement.</p>
+            </div>
+          </div>
+          <div class="program-card">
+            <div class="program-header">
+              <i class="fas fa-utensils"></i>
+              <h3>Food Assistance</h3>
+            </div>
+            <div class="program-content">
+              <p>Providing emergency food supplies to families facing hunger, especially during drought seasons, after crop failure, or during family crises.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Emergency Response -->
+      <div class="content-card">
+        <h2 class="section-title">Emergency Response</h2>
+        <div class="emergency-card">
+          <i class="fas fa-bell" style="font-size: 2rem; color: var(--orange); margin-bottom: 1rem; display: inline-block;"></i>
+          <h3 style="color: var(--primary); margin-bottom: 1rem;">When Crisis Strikes, We're Ready to Act</h3>
+          <p>When natural disasters, family emergencies, or unexpected crises occur, Helping Hands Uganda mobilizes quickly to provide immediate relief. Our emergency response includes:</p>
+          <ul style="margin-left: 1.5rem; margin-top: 1rem;">
+            <li><i class="fas fa-check-circle" style="color: var(--primary);"></i> Rapid needs assessment to identify the most vulnerable</li>
+            <li><i class="fas fa-check-circle" style="color: var(--primary);"></i> Emergency distribution of food, water, and essential supplies</li>
+            <li><i class="fas fa-check-circle" style="color: var(--primary);"></i> Temporary shelter for displaced families</li>
+            <li><i class="fas fa-check-circle" style="color: var(--primary);"></i> Referrals to healthcare services and other support</li>
+            <li><i class="fas fa-check-circle" style="color: var(--primary);"></i> Follow-up support to help families recover and rebuild</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Who We Help -->
+      <div class="content-card">
+        <h2 class="section-title">Who We Help</h2>
+        <div class="info-grid">
+          <div class="info-card">
+            <i class="fas fa-female"></i>
+            <h3>Single Mothers</h3>
+            <p>Women struggling to provide for their children with limited resources receive clothing, household items, and emergency support during difficult times.</p>
+          </div>
+          <div class="info-card">
+            <i class="fas fa-child"></i>
+            <h3>Orphaned Children</h3>
+            <p>Children who have lost parents receive clothing, bedding, and basic necessities to ensure their comfort and dignity.</p>
+          </div>
+          <div class="info-card">
+            <i class="fas fa-hand-holding-heart"></i>
+            <h3>Elderly & Disabled</h3>
+            <p>Vulnerable elderly individuals and people with disabilities who lack family support receive essential aid and regular check-ins.</p>
+          </div>
+          <div class="info-card">
+            <i class="fas fa-home"></i>
+            <h3>Displaced Families</h3>
+            <p>Families who have lost their homes due to fire, storms, or conflict receive emergency shelter and household support.</p>
+          </div>
+          <div class="info-card">
+            <i class="fas fa-tint"></i>
+            <h3>Crisis-Affected Communities</h3>
+            <p>Whole communities affected by drought, floods, or other disasters receive coordinated humanitarian assistance.</p>
+          </div>
+          <div class="info-card">
+            <i class="fas fa-heart"></i>
+            <h3>Terminally Ill Patients</h3>
+            <p>Individuals facing life-limiting illnesses receive comfort items, bedding, and support for their families.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stories of Hope -->
+      <div class="content-card">
+        <h2 class="section-title">Stories of Hope</h2>
+        
+        <div class="testimonial-card">
+          <i class="fas fa-quote-left" style="color: var(--primary); font-size: 2rem; opacity: 0.5;"></i>
+          <p class="testimonial-text">"When my house was destroyed by the storm, I didn't know what to do. Helping Hands Uganda brought us blankets, clothes, and materials to rebuild. My children slept warm that night. I will never forget their kindness."</p>
+          <div class="testimonial-author">— Grace, Widow & Mother of Four</div>
+        </div>
+        
+        <div class="testimonial-card">
+          <i class="fas fa-quote-left" style="color: var(--primary); font-size: 2rem; opacity: 0.5;"></i>
+          <p class="testimonial-text">"After my husband passed away, I had nothing. The clothing and household items I received helped me start over. Now I am slowly rebuilding my life. Thank you for seeing me when I felt invisible."</p>
+          <div class="testimonial-author">— Mary, Widow & Small Business Owner</div>
+        </div>
+        
+        <div class="testimonial-card">
+          <i class="fas fa-quote-left" style="color: var(--primary); font-size: 2rem; opacity: 0.5;"></i>
+          <p class="testimonial-text">"The blankets and bedding we received came just before the cold season. My children no longer shiver at night. This simple gift changed our lives."</p>
+          <div class="testimonial-author">— James, Father of Three</div>
+        </div>
+      </div>
+
+      <!-- How We Distribute -->
+      <div class="content-card">
+        <h2 class="section-title">Our Distribution Process</h2>
+        <div class="info-grid">
+          <div class="info-card">
+            <i class="fas fa-clipboard-list"></i>
+            <h3>Needs Assessment</h3>
+            <p>We work with community leaders to identify the most vulnerable individuals and families who need assistance most urgently.</p>
+          </div>
+          <div class="info-card">
+            <i class="fas fa-hand-holding-heart"></i>
+            <h3>Dignity-Centered Approach</h3>
+            <p>We distribute aid with respect and compassion, ensuring recipients are treated with dignity and allowed to choose items that meet their specific needs.</p>
+          </div>
+          <div class="info-card">
+            <i class="fas fa-chart-line"></i>
+            <h3>Follow-Up Support</h3>
+            <p>We check in with families after distributions to ensure needs are met and connect them with other programs that can help them achieve long-term stability.</p>
+          </div>
+          <div class="info-card">
+            <i class="fas fa-users"></i>
+            <h3>Community Involvement</h3>
+            <p>Local volunteers help with distributions, ensuring transparency and building community ownership of the aid process.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Urgent Needs -->
+      <div class="content-card">
+        <h2 class="section-title">How You Can Help</h2>
+        <p>Your support enables us to provide immediate relief to families in crisis. Here are the items we urgently need:</p>
+        <div class="needs-grid">
+          <div class="need-item">
+            <div class="need-icon"><i class="fas fa-tshirt"></i></div>
+            <div class="need-content">
+              <h4>Children's Clothing</h4>
+              <p>New or gently used clothes for children of all ages</p>
+            </div>
+          </div>
+          <div class="need-item">
+            <div class="need-icon"><i class="fas fa-bed"></i></div>
+            <div class="need-content">
+              <h4>Blankets & Bedding</h4>
+              <p>Warm blankets, sheets, and sleeping mats</p>
+            </div>
+          </div>
+          <div class="need-item">
+            <div class="need-icon"><i class="fas fa-utensils"></i></div>
+            <div class="need-content">
+              <h4>Kitchen Supplies</h4>
+              <p>Cooking pots, plates, cups, and utensils</p>
+            </div>
+          </div>
+          <div class="need-item">
+            <div class="need-icon"><i class="fas fa-soap"></i></div>
+            <div class="need-content">
+              <h4>Hygiene Items</h4>
+              <p>Soap, toothpaste, sanitary pads, and cleaning supplies</p>
+            </div>
+          </div>
+          <div class="need-item">
+            <div class="need-icon"><i class="fas fa-school"></i></div>
+            <div class="need-content">
+              <h4>School Supplies</h4>
+              <p>Backpacks, notebooks, and school materials for children</p>
+            </div>
+          </div>
+          <div class="need-item">
+            <div class="need-icon"><i class="fas fa-dollar-sign"></i></div>
+            <div class="need-content">
+              <h4>Emergency Funds</h4>
+              <p>Financial support to purchase items families need most</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Long-Term Vision -->
+      <div class="content-card">
+        <h2 class="section-title">Beyond Emergency Relief</h2>
+        <div style="background: linear-gradient(135deg, rgba(128, 0, 0, 0.08), rgba(100, 50, 30, 0.08)); padding: 1.5rem; border-radius: 1rem;">
+          <i class="fas fa-seedling" style="font-size: 2rem; color: var(--primary); margin-bottom: 1rem; display: inline-block;"></i>
+          <p>While humanitarian aid provides immediate relief, our ultimate goal is to help families build resilience and self-sufficiency. We connect families receiving emergency assistance with our other programs:</p>
+          <ul style="margin-left: 1.5rem; margin-top: 1rem;">
+            <li><i class="fas fa-check-circle" style="color: var(--primary);"></i> Education support for children</li>
+            <li><i class="fas fa-check-circle" style="color: var(--primary);"></i> Skills training for women</li>
+            <li><i class="fas fa-check-circle" style="color: var(--primary);"></i> SACCO membership for economic empowerment</li>
+            <li><i class="fas fa-check-circle" style="color: var(--primary);"></i> Orphan care programs for vulnerable children</li>
+            <li><i class="fas fa-check-circle" style="color: var(--primary);"></i> Follow-up support for long-term stability</li>
+          </ul>
+          <p style="margin-top: 1rem;">By addressing both immediate needs and long-term development, we help families not just survive, but thrive.</p>
+        </div>
+      </div>
+
+      <!-- Call to Action -->
+      <div class="content-card" style="text-align: center; background: linear-gradient(135deg, rgba(128,0,0,0.95), rgba(100,50,30,0.95)); color: white;">
+        <h2 style="color: white; margin-bottom: 1rem;">Be a Helping Hand</h2>
+        <p style="margin-bottom: 1.5rem;">Your donation can provide a family with clothing, bedding, and essential supplies during their time of greatest need. Together, we can ensure that no one faces crisis alone.</p>
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+          <a href="donate.html" style="background: #ffb347; color: #2d1b0c; padding: 0.8rem 2rem; border-radius: 60px; text-decoration: none; font-weight: bold;"><i class="fas fa-donate"></i> Donate Now</a>
+          <a href="contact.html" style="background: transparent; border: 2px solid white; color: white; padding: 0.8rem 2rem; border-radius: 60px; text-decoration: none; font-weight: bold;"><i class="fas fa-box-open"></i> Donate Supplies</a>
+          <a href="gallery.html" style="background: transparent; border: 2px solid white; color: white; padding: 0.8rem 2rem; border-radius: 60px; text-decoration: none; font-weight: bold;"><i class="fas fa-images"></i> See Our Impact</a>
+        </div>
+        <p style="margin-top: 1.5rem; font-size: 0.9rem;"><i class="fas fa-heart"></i> Every donation, large or small, makes a difference in someone's life.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div><h4><i class="fas fa-hand-holding-heart"></i> Helping Hands Uganda</h4><p>Humya 1, LC I<br>Buhundu Parish<br>Bukonzo Subcounty<br>Bundibugyo District, Uganda</p></div>
+        <div><h4>Quick Links</h4><a href="about.html">About Us</a><a href="projects.html">Our Projects</a><a href="gallery.html">Gallery</a><a href="contact.html">Contact</a></div>
+        <div><h4>Contact Info</h4><a href="tel:+256764377294"><i class="fas fa-phone"></i> +256 764377294</a><a href="mailto:info@helpinghandsug.org"><i class="fas fa-envelope"></i> info@helpinghandsug.org</a></div>
+        <div><h4>Connect With Us</h4><div style="font-size: 1.8rem; letter-spacing: 0.5rem;"><i class="fab fa-facebook"></i><i class="fab fa-x-twitter"></i><i class="fab fa-instagram"></i><i class="fab fa-whatsapp"></i></div></div>
+      </div>
+      <div class="footer-bottom"><p>© 2025 Helping Hands Uganda. All rights reserved.</p><p>Registered Community Based Organization - Bundibugyo District, Uganda</p></div>
+    </div>
+  </footer>
+  <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i> Back to top</a>
+
+  <script>
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    const dropdowns = document.querySelectorAll('.dropdown');
+
+    if (menuToggle) {
+      menuToggle.addEventListener('click', function(e) {
+        e.stopPropagation();
+        navLinks.classList.toggle('show');
+      });
+    }
+
+    dropdowns.forEach(function(dropdown) {
+      const iconBtn = dropdown.querySelector('.dropdown-icon');
+      if (iconBtn) {
+        iconBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          dropdowns.forEach(d => { if (d !== dropdown) d.classList.remove('active'); });
+          dropdown.classList.toggle('active');
+        });
+      }
+    });
+
+    document.addEventListener('click', function(e) {
+      let inside = false;
+      dropdowns.forEach(d => { if (d.contains(e.target)) inside = true; });
+      if (!inside && menuToggle && !menuToggle.contains(e.target)) {
+        dropdowns.forEach(d => d.classList.remove('active'));
+        if (navLinks) navLinks.classList.remove('show');
+      }
+    });
+
+    // Back to top
+    const backToTop = document.querySelector('.back-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) backToTop.style.opacity = '1';
+      else backToTop.style.opacity = '0.9';
+    });
+  </script>
+</body>
+</html>
